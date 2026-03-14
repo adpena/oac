@@ -1,0 +1,80 @@
+{
+  "target": "codex",
+  "capsule_id": "hello-capsule",
+  "source_root": "codex",
+  "stats": {
+    "total": 2,
+    "promotable": 1,
+    "noop": 1,
+    "deferred": 0,
+    "target_local": 0,
+    "user_local": 0,
+    "runtime_state": 0,
+    "unsupported": 0
+  },
+  "notes": [
+    "Projection metadata is ignored during ingest.",
+    "Deep memory remains a future add-on via local files or MCP."
+  ],
+  "records": [
+    {
+      "proposal_id": "7459d4da029e87d9",
+      "candidate_id": "8f9053bb491d52c3",
+      "target": "codex",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "behavior.rule",
+      "canonical_kind": "behavior.rule",
+      "source_path": "AGENTS.md",
+      "surface_name": "project-rules",
+      "summary": "## Open Agent Capsule projection",
+      "candidate_path_hint": ".oac/candidates/codex/project-rules.md",
+      "canonical_path": "procedures/behavior/codex-open-agent-capsule-projection.md",
+      "rationale": "Portable rules promote into canonical procedures/behavior/.",
+      "metadata": {
+        "parser": "managed-section",
+        "rule": "project-rules",
+        "relative_path": "AGENTS.md",
+        "surface_name": "project-rules",
+        "notes": "Codex durable rules should stay concise and reviewable.",
+        "managed_section_tag": "codex",
+        "portability": "portable",
+        "ownership_mode": "managed-section",
+        "lossiness": "partially-lossless"
+      },
+      "content": "## Open Agent Capsule projection\n\n- Canonical capsule: `hello-capsule`\n- Use `.agents/skills/` for durable workflows.\n- Keep deep memory outside this file and access it via `.oac/codex/` or MCP.\n",
+      "canonical_content": "---\nkind: behavior.rule\nsummary: '## Open Agent Capsule projection'\nsource_target: codex\nsource_surface: project-rules\n---\n\n## Open Agent Capsule projection\n\n- Canonical capsule: `hello-capsule`\n- Use `.agents/skills/` for durable workflows.\n- Keep deep memory outside this file and access it via `.oac/codex/` or MCP.\n",
+      "current_content": "",
+      "diff": "--- current:procedures/behavior/codex-open-agent-capsule-projection.md\n+++ proposed:procedures/behavior/codex-open-agent-capsule-projection.md\n@@ -0,0 +1,12 @@\n+---\n+kind: behavior.rule\n+summary: '## Open Agent Capsule projection'\n+source_target: codex\n+source_surface: project-rules\n+---\n+\n+## Open Agent Capsule projection\n+\n+- Canonical capsule: `hello-capsule`\n+- Use `.agents/skills/` for durable workflows.\n+- Keep deep memory outside this file and access it via `.oac/codex/` or MCP.\n"
+    },
+    {
+      "proposal_id": "1404564b86b7924c",
+      "candidate_id": "41148a268b160fa6",
+      "target": "codex",
+      "disposition": "noop",
+      "operation": "skip",
+      "kind": "procedure.workflow",
+      "canonical_kind": "procedure.workflow",
+      "source_path": ".agents/skills/onboarding/SKILL.md",
+      "surface_name": "skill-root",
+      "summary": "onboarding",
+      "candidate_path_hint": ".oac/candidates/codex/skills/onboarding.md",
+      "canonical_path": "skills/onboarding/SKILL.md",
+      "rationale": "Skill-like workflows promote into canonical skills/.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills",
+        "relative_path": ".agents/skills/onboarding/SKILL.md",
+        "surface_name": "skill-root",
+        "notes": "Codex skills are promoted as durable workflow candidates.",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n",
+      "canonical_content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n",
+      "current_content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n",
+      "diff": ""
+    }
+  ]
+}

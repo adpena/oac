@@ -1,0 +1,417 @@
+{
+  "$defs": {
+    "FlagSpec": {
+      "additionalProperties": false,
+      "description": "A canonical adapter flag with an optional harness-local alias.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "cli_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cli Name"
+        },
+        "harness_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Harness Name"
+        },
+        "type": {
+          "$ref": "#/$defs/FlagType",
+          "default": "string"
+        },
+        "default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "example": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Example"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "FlagSpec",
+      "type": "object"
+    },
+    "FlagType": {
+      "description": "High-level shape of a profile flag value.",
+      "enum": [
+        "bool",
+        "string",
+        "integer",
+        "string-list",
+        "path",
+        "enum"
+      ],
+      "title": "FlagType",
+      "type": "string"
+    },
+    "HarnessTarget": {
+      "description": "Known target harnesses for a projection.",
+      "enum": [
+        "codex",
+        "openclaw",
+        "claude-code",
+        "opencode",
+        "gemini",
+        "mcp",
+        "webmcp"
+      ],
+      "title": "HarnessTarget",
+      "type": "string"
+    },
+    "HookPhase": {
+      "description": "Lifecycle phases where advanced users may attach custom logic.",
+      "enum": [
+        "pre-hydrate",
+        "post-hydrate",
+        "pre-ingest",
+        "post-ingest",
+        "pre-promote",
+        "post-promote"
+      ],
+      "title": "HookPhase",
+      "type": "string"
+    },
+    "HookRuntime": {
+      "description": "Supported hook implementation runtimes for starter examples.",
+      "enum": [
+        "python",
+        "typescript",
+        "shell",
+        "zig",
+        "go",
+        "rust",
+        "wasm"
+      ],
+      "title": "HookRuntime",
+      "type": "string"
+    },
+    "HookSpec": {
+      "additionalProperties": false,
+      "description": "One opt-in hook that may run around hydrate or ingest steps.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/$defs/HookPhase"
+        },
+        "runtime": {
+          "$ref": "#/$defs/HookRuntime",
+          "default": "python"
+        },
+        "entrypoint": {
+          "minLength": 1,
+          "title": "Entrypoint",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "default": 30,
+          "maximum": 600,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Args",
+          "type": "array"
+        },
+        "env": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Env",
+          "type": "object"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "phase",
+        "entrypoint"
+      ],
+      "title": "HookSpec",
+      "type": "object"
+    },
+    "MappingMode": {
+      "description": "How a canonical record should materialize at a target surface.",
+      "enum": [
+        "managed-section",
+        "managed-file",
+        "imported-file",
+        "index-file",
+        "topic-files",
+        "sidecar",
+        "resource"
+      ],
+      "title": "MappingMode",
+      "type": "string"
+    },
+    "MappingRule": {
+      "additionalProperties": false,
+      "description": "A declarative mapping from canonical record kind to target surface.",
+      "properties": {
+        "canonical_kind": {
+          "minLength": 1,
+          "title": "Canonical Kind",
+          "type": "string"
+        },
+        "target_surface": {
+          "minLength": 1,
+          "title": "Target Surface",
+          "type": "string"
+        },
+        "target_path": {
+          "minLength": 1,
+          "title": "Target Path",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/MappingMode"
+        },
+        "ownership_mode": {
+          "$ref": "#/$defs/OwnershipMode"
+        },
+        "portability": {
+          "$ref": "#/$defs/PortabilityClass",
+          "default": "portable"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "canonical_kind",
+        "target_surface",
+        "target_path",
+        "mode",
+        "ownership_mode"
+      ],
+      "title": "MappingRule",
+      "type": "object"
+    },
+    "OwnershipMode": {
+      "description": "Who owns the emitted artifact or section.\n\nUse ``MANAGED_FILE`` when OAC controls the whole file.\nUse ``MANAGED_SECTION`` when OAC only owns marked regions.\nUse ``IMPORTED_FILE`` when the harness points at an OAC-generated file.\nUse ``SIDECAR`` for non-canonical, nearby runtime data.",
+      "enum": [
+        "managed-file",
+        "managed-section",
+        "imported-file",
+        "sidecar"
+      ],
+      "title": "OwnershipMode",
+      "type": "string"
+    },
+    "PortabilityClass": {
+      "description": "How broadly a record may travel.\n\n``PORTABLE`` is safe to share in the canonical capsule.\n``USER_LOCAL`` is useful, but should stay out of the shared project by default.\n``RUNTIME_STATE`` covers credentials, provider caches, or machine-owned state.",
+      "enum": [
+        "portable",
+        "user-local",
+        "runtime-state"
+      ],
+      "title": "PortabilityClass",
+      "type": "string"
+    },
+    "SurfaceSpec": {
+      "additionalProperties": false,
+      "description": "One target-native surface exposed by an adapter profile.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "ownership_mode": {
+          "$ref": "#/$defs/OwnershipMode"
+        },
+        "portability": {
+          "$ref": "#/$defs/PortabilityClass",
+          "default": "portable"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "path",
+        "ownership_mode"
+      ],
+      "title": "SurfaceSpec",
+      "type": "object"
+    },
+    "WrapperSpec": {
+      "additionalProperties": false,
+      "description": "A named launcher wrapper for a harness installation.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "env": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Env",
+          "type": "object"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "WrapperSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Schema-backed adapter customization layer.\n\nThe default profile shipped by OAC gives every harness a canonical set of surfaces,\nflags, mappings, hooks, and wrappers. Users can copy that profile and adapt paths,\nnaming conventions, and opt-in hook behavior to match their actual environment.",
+  "properties": {
+    "format": {
+      "default": "oac.adapter-profile.v0",
+      "title": "Format",
+      "type": "string"
+    },
+    "profile_name": {
+      "minLength": 1,
+      "title": "Profile Name",
+      "type": "string"
+    },
+    "target": {
+      "$ref": "#/$defs/HarnessTarget"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "surfaces": {
+      "items": {
+        "$ref": "#/$defs/SurfaceSpec"
+      },
+      "title": "Surfaces",
+      "type": "array"
+    },
+    "flags": {
+      "items": {
+        "$ref": "#/$defs/FlagSpec"
+      },
+      "title": "Flags",
+      "type": "array"
+    },
+    "mappings": {
+      "items": {
+        "$ref": "#/$defs/MappingRule"
+      },
+      "title": "Mappings",
+      "type": "array"
+    },
+    "hooks": {
+      "items": {
+        "$ref": "#/$defs/HookSpec"
+      },
+      "title": "Hooks",
+      "type": "array"
+    },
+    "wrappers": {
+      "items": {
+        "$ref": "#/$defs/WrapperSpec"
+      },
+      "title": "Wrappers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "profile_name",
+    "target"
+  ],
+  "title": "AdapterProfile",
+  "type": "object"
+}

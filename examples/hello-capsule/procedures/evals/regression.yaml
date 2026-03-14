@@ -1,0 +1,9 @@
+targets:
+  codex:
+    assert_paths_exist:
+      - AGENTS.md
+      - .agents/skills/onboarding/SKILL.md
+      - .oac/codex/identity/identity.md
+    assert_content_contains:
+      "AGENTS.md": "Open Agent Capsule projection"
+      ".agents/skills/onboarding/SKILL.md": "## Trigger"

@@ -1,0 +1,43 @@
+format: oac.v0
+capsule_id: hello-capsule
+name: Hello Capsule
+description: Minimal example capsule for schema, profiles, and projection validation.
+created_at: 2026-03-12T00:00:00Z
+license: Apache-2.0
+owners:
+  - Example Maintainer
+canonical_paths:
+  identity: identity
+  memory: memory
+  procedures: procedures
+  skills: skills
+  provenance: provenance
+targets:
+  - name: codex
+    mode: native-files
+    enabled: true
+    notes: Emit AGENTS.md and skill folders.
+  - name: openclaw
+    mode: native-files
+    enabled: true
+    notes: Emit workspace-native markdown files.
+  - name: claude-code
+    mode: native-files
+    enabled: true
+    notes: Emit CLAUDE.md plus local memory sidecar conventions.
+  - name: opencode
+    mode: native-files
+    enabled: true
+    notes: Emit AGENTS.md plus OpenCode agents, commands, and plugin-ready config.
+  - name: gemini
+    mode: native-files
+    enabled: true
+    notes: Emit GEMINI.md, imported docs, agents, and settings.
+  - name: mcp
+    mode: mcp
+    enabled: true
+    notes: Expose read-only capsule views first.
+  - name: webmcp
+    mode: mcp
+    enabled: true
+    notes: Expose browser-facing read-only views.

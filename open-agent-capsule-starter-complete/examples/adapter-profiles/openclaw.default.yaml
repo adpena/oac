@@ -1,0 +1,119 @@
+format: oac.adapter-profile.v0
+profile_name: openclaw.default
+target: openclaw
+description: Default OpenClaw workspace projection without implicit state cloning.
+surfaces:
+- name: workspace-rules
+  path: AGENTS.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Core OpenClaw workspace rules.
+- name: persona
+  path: SOUL.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Persona and tone projection surface.
+- name: user-model
+  path: USER.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Durable shared user model.
+- name: display-identity
+  path: IDENTITY.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Display-facing identity surface.
+- name: tool-notes
+  path: TOOLS.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Local tool notes and reminders.
+- name: curated-memory
+  path: MEMORY.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Curated durable OpenClaw memory surface.
+- name: episodic-memory
+  path: memory/{date}.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Recent episodic notes as daily logs.
+- name: skill-root
+  path: skills
+  ownership_mode: managed-file
+  portability: portable
+  notes: Reusable procedures and task skills.
+- name: runtime-sidecar
+  path: .oac/openclaw/state-sidecar/
+  ownership_mode: sidecar
+  portability: runtime-state
+  notes: Opt-in encrypted runtime sidecar for state migration scenarios.
+flags:
+- name: emit_daily_memory
+  cli_name: --emit-daily-memory
+  harness_name: memory/{date}.md
+  type: bool
+  default: true
+  description: Emit episodic notes as OpenClaw daily memory files.
+- name: emit_tools_notes
+  cli_name: --emit-tools-notes
+  harness_name: TOOLS.md
+  type: bool
+  default: true
+  description: Emit tool notes when the capsule contains them.
+- name: emit_state_sidecar
+  cli_name: --emit-state-sidecar
+  harness_name: .oac/openclaw/state-sidecar/
+  type: bool
+  default: false
+  description: Never enabled by default; preserves the line between workspace and
+    full clone.
+- name: state_sidecar_path
+  cli_name: --state-sidecar-path
+  harness_name: runtime-sidecar.path
+  type: path
+  default: .oac/openclaw/state-sidecar/
+  description: Opt-in location for encrypted runtime sidecar data.
+mappings:
+- canonical_kind: identity.persona
+  target_surface: persona
+  target_path: SOUL.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: OpenClaw keeps persona distinct from rule and memory files.
+- canonical_kind: user.model
+  target_surface: user-model
+  target_path: USER.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: Shared user model goes to USER.md, not the runtime sidecar.
+- canonical_kind: memory.semantic
+  target_surface: curated-memory
+  target_path: MEMORY.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: Durable semantic memory stays curated and compact.
+- canonical_kind: memory.episodic
+  target_surface: episodic-memory
+  target_path: memory/{date}.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: Episodic traces project to daily logs and promote later.
+- canonical_kind: runtime.state
+  target_surface: runtime-sidecar
+  target_path: .oac/openclaw/state-sidecar/
+  mode: sidecar
+  ownership_mode: sidecar
+  portability: runtime-state
+  notes: Runtime state is sidecar-only and never implied by the workspace projection.
+hooks: []
+wrappers:
+- name: openclaw-default
+  command:
+  - openclaw
+  env: {}
+  notes: Wrapper placeholder for local OpenClaw launch commands.

@@ -1,0 +1,161 @@
+{
+  "$defs": {
+    "CanonicalPaths": {
+      "additionalProperties": false,
+      "description": "Directory contracts for canonical source material.",
+      "properties": {
+        "identity": {
+          "default": "identity",
+          "title": "Identity",
+          "type": "string"
+        },
+        "memory": {
+          "default": "memory",
+          "title": "Memory",
+          "type": "string"
+        },
+        "procedures": {
+          "default": "procedures",
+          "title": "Procedures",
+          "type": "string"
+        },
+        "skills": {
+          "default": "skills",
+          "title": "Skills",
+          "type": "string"
+        },
+        "provenance": {
+          "default": "provenance",
+          "title": "Provenance",
+          "type": "string"
+        }
+      },
+      "title": "CanonicalPaths",
+      "type": "object"
+    },
+    "HarnessTarget": {
+      "description": "Known target harnesses for a projection.",
+      "enum": [
+        "codex",
+        "openclaw",
+        "claude-code",
+        "opencode",
+        "gemini",
+        "mcp",
+        "webmcp"
+      ],
+      "title": "HarnessTarget",
+      "type": "string"
+    },
+    "ProjectionMode": {
+      "description": "How a target is served or materialized.",
+      "enum": [
+        "native-files",
+        "mcp",
+        "sdk",
+        "none"
+      ],
+      "title": "ProjectionMode",
+      "type": "string"
+    },
+    "ProjectionTarget": {
+      "additionalProperties": false,
+      "description": "A supported target projection.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/HarnessTarget"
+        },
+        "mode": {
+          "$ref": "#/$defs/ProjectionMode",
+          "default": "native-files"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ProjectionTarget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Minimal manifest for an Open Agent Capsule.",
+  "properties": {
+    "format": {
+      "default": "oac.v0",
+      "description": "Manifest format identifier.",
+      "title": "Format",
+      "type": "string"
+    },
+    "capsule_id": {
+      "description": "Stable capsule identifier.",
+      "minLength": 1,
+      "title": "Capsule Id",
+      "type": "string"
+    },
+    "name": {
+      "description": "Human-readable capsule name.",
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "description": "Short description of purpose.",
+      "title": "Description",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "Manifest creation time in UTC.",
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "license": {
+      "default": "Apache-2.0",
+      "description": "Project license identifier.",
+      "title": "License",
+      "type": "string"
+    },
+    "owners": {
+      "description": "Primary maintainers.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Owners",
+      "type": "array"
+    },
+    "canonical_paths": {
+      "$ref": "#/$defs/CanonicalPaths"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/ProjectionTarget"
+      },
+      "title": "Targets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "capsule_id",
+    "name"
+  ],
+  "title": "CapsuleManifest",
+  "type": "object"
+}

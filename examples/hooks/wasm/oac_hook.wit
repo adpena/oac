@@ -1,0 +1,25 @@
+package oac:hooks;
+
+interface lifecycle {
+  record hook-input {
+    phase: string,
+    target: string,
+    profile-name: string,
+    capsule-root: string,
+    work-root: string,
+    trace-id: string,
+    dry-run: bool,
+    records-changed: u32,
+  }
+
+  record hook-result {
+    status: string,
+    note: string,
+  }
+
+  run: func(input: hook-input) -> hook-result;
+}
+
+world starter-hook {
+  export lifecycle;
+}

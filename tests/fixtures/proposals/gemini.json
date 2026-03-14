@@ -1,0 +1,254 @@
+{
+  "target": "gemini",
+  "capsule_id": "hello-capsule",
+  "source_root": "gemini",
+  "format": "oac.proposal-bundle.v0",
+  "stats": {
+    "total": 6,
+    "promotable": 4,
+    "noop": 0,
+    "deferred": 0,
+    "target_local": 0,
+    "user_local": 0,
+    "runtime_state": 0,
+    "unsupported": 2,
+    "conflict": 0
+  },
+  "notes": [
+    "Gemini settings and extensions are scanned as structured signal, not canonical truth.",
+    "Imported markdown is preferred over stuffing the root file indefinitely."
+  ],
+  "records": [
+    {
+      "proposal_id": "e7956c8834f05bdd",
+      "candidate_id": "d195720c2c38004c",
+      "target": "gemini",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "behavior.rule",
+      "canonical_kind": "behavior.rule",
+      "source_path": "GEMINI.md",
+      "surface_name": "context-file",
+      "summary": "GEMINI.md",
+      "candidate_path_hint": ".oac/candidates/gemini/context-file.md",
+      "canonical_path": "procedures/behavior/gemini-gemini-md.md",
+      "rationale": "Portable rules promote into canonical procedures/behavior/.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "context-file",
+        "relative_path": "GEMINI.md",
+        "surface_name": "context-file",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "# GEMINI.md\n\nKeep this file concise.\n\n@.oac/gemini/instructions/project-rules.md\n",
+      "canonical_content": "---\nkind: behavior.rule\nsummary: GEMINI.md\nsource_target: gemini\nsource_surface: context-file\n---\n\n# GEMINI.md\n\nKeep this file concise.\n\n@.oac/gemini/instructions/project-rules.md\n",
+      "current_content": "",
+      "diff": "--- current:procedures/behavior/gemini-gemini-md.md\n+++ proposed:procedures/behavior/gemini-gemini-md.md\n@@ -0,0 +1,12 @@\n+---\n+kind: behavior.rule\n+summary: GEMINI.md\n+source_target: gemini\n+source_surface: context-file\n+---\n+\n+# GEMINI.md\n+\n+Keep this file concise.\n+\n+@.oac/gemini/instructions/project-rules.md\n",
+      "structured_diff": {
+        "additions": 12,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 12
+      }
+    },
+    {
+      "proposal_id": "23686dd5bfd29605",
+      "candidate_id": "6f9651d6684f1399",
+      "target": "gemini",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "instruction.fragment",
+      "canonical_kind": "behavior.rule",
+      "source_path": ".oac/gemini/instructions/project-rules.md",
+      "surface_name": "imported-instructions",
+      "summary": "project rules",
+      "candidate_path_hint": ".oac/candidates/gemini/instructions/project-rules.md",
+      "canonical_path": "procedures/behavior/gemini-project-rules.md",
+      "rationale": "Portable rules promote into canonical procedures/behavior/.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "imported-instructions",
+        "relative_path": ".oac/gemini/instructions/project-rules.md",
+        "surface_name": "imported-instructions",
+        "portability": "portable",
+        "ownership_mode": "imported-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "# project rules\n\n- Prefer imported markdown fragments over one huge context file.\n- Keep settings and extension wiring replaceable.\n- Capsule: `hello-capsule`\n",
+      "canonical_content": "---\nkind: behavior.rule\nsummary: project rules\nsource_target: gemini\nsource_surface: imported-instructions\n---\n\n# project rules\n\n- Prefer imported markdown fragments over one huge context file.\n- Keep settings and extension wiring replaceable.\n- Capsule: `hello-capsule`\n",
+      "current_content": "",
+      "diff": "--- current:procedures/behavior/gemini-project-rules.md\n+++ proposed:procedures/behavior/gemini-project-rules.md\n@@ -0,0 +1,12 @@\n+---\n+kind: behavior.rule\n+summary: project rules\n+source_target: gemini\n+source_surface: imported-instructions\n+---\n+\n+# project rules\n+\n+- Prefer imported markdown fragments over one huge context file.\n+- Keep settings and extension wiring replaceable.\n+- Capsule: `hello-capsule`\n",
+      "structured_diff": {
+        "additions": 12,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 12
+      }
+    },
+    {
+      "proposal_id": "ac39196760380942",
+      "candidate_id": "a0483ce5f85bed19",
+      "target": "gemini",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "agent.specialist",
+      "canonical_kind": "agent.specialist",
+      "source_path": ".gemini/agents/reviewer.md",
+      "surface_name": "agent-root",
+      "summary": "reviewer",
+      "candidate_path_hint": ".oac/candidates/gemini/agents/reviewer.md",
+      "canonical_path": "procedures/agents/reviewer.md",
+      "rationale": "Specialist agent prompts promote into canonical procedures/agents/.",
+      "metadata": {
+        "parser": "markdown",
+        "declared_summary": "reviewer",
+        "frontmatter": {
+          "name": "reviewer",
+          "description": "Reviews starter repository changes.",
+          "kind": "local",
+          "tools": [
+            "read_file",
+            "grep_search"
+          ],
+          "model": "gemini-2.5-pro",
+          "temperature": 0.2,
+          "max_turns": 10
+        },
+        "rule": "agents",
+        "relative_path": ".gemini/agents/reviewer.md",
+        "surface_name": "agent-root",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "---\nname: reviewer\ndescription: Reviews starter repository changes.\nkind: local\ntools:\n  - read_file\n  - grep_search\nmodel: gemini-2.5-pro\ntemperature: 0.2\nmax_turns: 10\n---\n\nAudit changes for schema drift, fixture drift, and launch honesty.\n",
+      "canonical_content": "---\nkind: agent.specialist\nsummary: reviewer\nsource_target: gemini\nsource_surface: agent-root\n---\n\nAudit changes for schema drift, fixture drift, and launch honesty.\n",
+      "current_content": "",
+      "diff": "--- current:procedures/agents/reviewer.md\n+++ proposed:procedures/agents/reviewer.md\n@@ -0,0 +1,8 @@\n+---\n+kind: agent.specialist\n+summary: reviewer\n+source_target: gemini\n+source_surface: agent-root\n+---\n+\n+Audit changes for schema drift, fixture drift, and launch honesty.\n",
+      "structured_diff": {
+        "additions": 8,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 8
+      }
+    },
+    {
+      "proposal_id": "f501df6b16b6a431",
+      "candidate_id": "a16dc53c1abe9b44",
+      "target": "gemini",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "config.signal",
+      "canonical_kind": "config.signal",
+      "source_path": ".gemini/settings.json",
+      "surface_name": "settings",
+      "summary": "settings.json: experimental, mcpServers",
+      "candidate_path_hint": ".oac/candidates/gemini/settings.json",
+      "canonical_path": "procedures/config/gemini/settings-json-experimental-mcpservers.json",
+      "rationale": "Target-specific configuration signal promoted for review.",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "experimental",
+          "mcpServers"
+        ],
+        "rule": "settings",
+        "relative_path": ".gemini/settings.json",
+        "surface_name": "settings",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "{\n  \"experimental\": {\n    \"enableAgents\": true\n  },\n  \"mcpServers\": {\n    \"oac\": {\n      \"command\": \"oac\",\n      \"args\": [\n        \"serve-mcp\"\n      ]\n    }\n  }\n}\n",
+      "canonical_content": "---\nkind: config.signal\nsummary: 'settings.json: experimental, mcpServers'\nsource_target: gemini\nsource_surface: settings\n---\n\n{\n  \"experimental\": {\n    \"enableAgents\": true\n  },\n  \"mcpServers\": {\n    \"oac\": {\n      \"command\": \"oac\",\n      \"args\": [\n        \"serve-mcp\"\n      ]\n    }\n  }\n}\n",
+      "current_content": "",
+      "diff": "--- current:procedures/config/gemini/settings-json-experimental-mcpservers.json\n+++ proposed:procedures/config/gemini/settings-json-experimental-mcpservers.json\n@@ -0,0 +1,20 @@\n+---\n+kind: config.signal\n+summary: 'settings.json: experimental, mcpServers'\n+source_target: gemini\n+source_surface: settings\n+---\n+\n+{\n+  \"experimental\": {\n+    \"enableAgents\": true\n+  },\n+  \"mcpServers\": {\n+    \"oac\": {\n+      \"command\": \"oac\",\n+      \"args\": [\n+        \"serve-mcp\"\n+      ]\n+    }\n+  }\n+}\n",
+      "structured_diff": {
+        "additions": 20,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 20
+      }
+    },
+    {
+      "proposal_id": "f0ded6148b8fce19",
+      "candidate_id": "8465d1e2ae5d6ae8",
+      "target": "gemini",
+      "disposition": "unsupported",
+      "operation": "skip",
+      "kind": "extension.bundle",
+      "canonical_kind": null,
+      "source_path": ".gemini/extensions/oac/gemini-extension.json",
+      "surface_name": "extension-root",
+      "summary": "gemini-extension.json: name, version",
+      "candidate_path_hint": ".oac/candidates/gemini/extensions/gemini-extension.json",
+      "canonical_path": null,
+      "rationale": "No canonical destination is defined for this candidate kind yet.",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "name",
+          "version"
+        ],
+        "rule": "extension-manifest",
+        "relative_path": ".gemini/extensions/oac/gemini-extension.json",
+        "surface_name": "extension-root",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "{\n  \"name\": \"oac-extension\",\n  \"version\": \"0.1.0\"\n}\n",
+      "canonical_content": "",
+      "current_content": "",
+      "diff": "",
+      "structured_diff": {
+        "additions": 0,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 0
+      }
+    },
+    {
+      "proposal_id": "a388cbf3e0192e37",
+      "candidate_id": "e58aa90949b62070",
+      "target": "gemini",
+      "disposition": "unsupported",
+      "operation": "skip",
+      "kind": "hook.bundle",
+      "canonical_kind": null,
+      "source_path": ".gemini/extensions/oac/hooks/hooks.json",
+      "surface_name": "extension-root",
+      "summary": "hooks.json: postHydrate",
+      "candidate_path_hint": ".oac/candidates/gemini/hooks/hooks.json",
+      "canonical_path": null,
+      "rationale": "No canonical destination is defined for this candidate kind yet.",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "postHydrate"
+        ],
+        "rule": "hook-bundles",
+        "relative_path": ".gemini/extensions/oac/hooks/hooks.json",
+        "surface_name": "extension-root",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "{\n  \"postHydrate\": [\n    {\n      \"command\": \"zig\",\n      \"args\": [\n        \"run\",\n        \"examples/hooks/zig/post_hydrate_notice.zig\"\n      ]\n    }\n  ]\n}\n",
+      "canonical_content": "",
+      "current_content": "",
+      "diff": "",
+      "structured_diff": {
+        "additions": 0,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 0
+      }
+    }
+  ]
+}

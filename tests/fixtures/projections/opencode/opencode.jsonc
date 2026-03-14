@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md",
+    ".oac/opencode/project-guidance.md"
+  ],
+  "plugin": [
+    "./.opencode/plugins/oac-hooks.ts"
+  ],
+  "mcp": {
+    "oac": {
+      "enabled": true
+    }
+  }
+}

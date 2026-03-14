@@ -1,0 +1,97 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+from oac.adapter_utils import load_effective_profile, record_artifact, write_json
+from oac.adapters.base import (
+    AdapterOptions,
+    IngestReport,
+    IngestSupport,
+    LossinessKind,
+    OwnershipMode,
+    ProjectionReport,
+)
+from oac.capsule import load_capsule
+from oac.ingest import IngestPlan, run_ingest_plan
+from oac.io import write_text
+
+
+class WebMCPAdapter:
+    """Hydrate a browser-facing WebMCP companion surface."""
+
+    name = "webmcp"
+    default_ownership_mode = OwnershipMode.MANAGED_FILE
+
+    def hydrate(
+        self,
+        capsule_root: Path,
+        destination: Path,
+        options: AdapterOptions | None = None,
+    ) -> ProjectionReport:
+        options = options or AdapterOptions()
+        capsule = load_capsule(capsule_root)
+        profile = load_effective_profile(self.name, options.profile_path)
+
+        report = ProjectionReport(
+            target=self.name,
+            destination=str(destination),
+            ownership_mode=self.default_ownership_mode,
+            lossiness=LossinessKind.PARTIALLY_LOSSLESS,
+            notes=[
+                "Launch surface is strictly read-only.",
+                f"Profile: {profile.profile_name}",
+            ],
+        )
+
+        markdown_path = destination / "resources/capsule-summary.md"
+        files = {
+            markdown_path: (
+                "# capsule summary\n\n"
+                f"Browser-readable summary for `{capsule.manifest.capsule_id}`.\n"
+            )
+        }
+        tools = {
+            destination / "tools/search-memory.json": {
+                "name": "search-memory",
+                "mode": "read-only",
+            },
+            destination / "tools/read-record.json": {
+                "name": "read-record",
+                "mode": "read-only",
+            },
+        }
+
+        for path, content in files.items():
+            if not options.dry_run:
+                write_text(path, content)
+            record_artifact(
+                report, str(path.relative_to(destination)), path.name, OwnershipMode.MANAGED_FILE
+            )
+
+        for path, payload in tools.items():
+            if not options.dry_run:
+                write_json(path, payload)
+            record_artifact(
+                report, str(path.relative_to(destination)), path.name, OwnershipMode.MANAGED_FILE
+            )
+
+        return report
+
+    def ingest_plan(self, options: AdapterOptions | None = None) -> IngestPlan:
+        _ = options
+        return IngestPlan(
+            target=self.name,
+            support=IngestSupport.READ_ONLY,
+            summary="The starter WebMCP surface is read-only and does not support ingest.",
+            notes=["Browser tool invocations stay outside the canonical write path for now."],
+        )
+
+    def ingest(
+        self,
+        source_root: Path,
+        capsule_root: Path,
+        options: AdapterOptions | None = None,
+    ) -> IngestReport:
+        _ = capsule_root
+        plan = self.ingest_plan(options)
+        return run_ingest_plan(source_root, plan)

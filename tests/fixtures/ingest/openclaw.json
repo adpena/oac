@@ -1,0 +1,171 @@
+{
+  "target": "openclaw",
+  "source_root": "openclaw",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 8,
+    "matched_paths": 8,
+    "candidate_count": 8,
+    "ignored_paths": 0,
+    "unchanged_count": 0
+  },
+  "notes": [
+    "The runtime sidecar is intentionally excluded from ingest.",
+    "Workspace files are treated as portable, but promotion remains explicit."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "09323dd7b2cf1ae2",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "workspace-rules",
+      "source_path": "AGENTS.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/workspace-rules.md",
+      "summary": "OpenClaw Rules",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "workspace-rules",
+        "relative_path": "AGENTS.md",
+        "surface_name": "workspace-rules"
+      },
+      "content": "# OpenClaw Rules\n\nKeep the workspace concise and durable.\n"
+    },
+    {
+      "candidate_id": "3f7ed145334c6bb2",
+      "kind": "identity.persona",
+      "suggested_canonical_kind": "identity.persona",
+      "surface_name": "persona",
+      "source_path": "SOUL.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/persona.md",
+      "summary": "Soul",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "persona",
+        "relative_path": "SOUL.md",
+        "surface_name": "persona"
+      },
+      "content": "# Soul\n\nPrefer concrete, testable changes. Keep instructions concise and durable.\n"
+    },
+    {
+      "candidate_id": "ff7e046258600dfc",
+      "kind": "user.model",
+      "suggested_canonical_kind": "user.model",
+      "surface_name": "user-model",
+      "source_path": "USER.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/user-model.md",
+      "summary": "User",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "user-model",
+        "relative_path": "USER.md",
+        "surface_name": "user-model"
+      },
+      "content": "# User\n\nThe user prefers practical design, explicit contracts, and launch-ready examples.\n"
+    },
+    {
+      "candidate_id": "94c0bc0ca54dcb83",
+      "kind": "identity.display",
+      "suggested_canonical_kind": "identity.display",
+      "surface_name": "display-identity",
+      "source_path": "IDENTITY.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/display-identity.md",
+      "summary": "Identity",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "display-identity",
+        "relative_path": "IDENTITY.md",
+        "surface_name": "display-identity"
+      },
+      "content": "# Identity\n\nHello Capsule\n"
+    },
+    {
+      "candidate_id": "5dc2e453046333ee",
+      "kind": "tool.note",
+      "suggested_canonical_kind": null,
+      "surface_name": "tool-notes",
+      "source_path": "TOOLS.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/tool-notes.md",
+      "summary": "Tools",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "tool-notes",
+        "relative_path": "TOOLS.md",
+        "surface_name": "tool-notes"
+      },
+      "content": "# Tools\n\nPrefer deterministic automation and explicit wrappers.\n"
+    },
+    {
+      "candidate_id": "10528170d1e98dbe",
+      "kind": "memory.semantic",
+      "suggested_canonical_kind": "memory.semantic",
+      "surface_name": "curated-memory",
+      "source_path": "MEMORY.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/curated-memory.md",
+      "summary": "Memory",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "curated-memory",
+        "relative_path": "MEMORY.md",
+        "surface_name": "curated-memory"
+      },
+      "content": "# Memory\n\n- The canonical artifact is an Open Agent Capsule.\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\n- MCP is an access surface, not the canonical storage layer.\n- Prefer file-first architecture.\n- Prefer deterministic tests over vague scaffolding.\n- Keep launch language honest about what is implemented versus scaffolded.\n"
+    },
+    {
+      "candidate_id": "31e783d99c8efeee",
+      "kind": "memory.episodic",
+      "suggested_canonical_kind": null,
+      "surface_name": "episodic-memory",
+      "source_path": "memory/2026-03-12.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/episodic/2026-03-12.md",
+      "summary": "2026-03-12",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "episodic-memory",
+        "relative_path": "memory/2026-03-12.md",
+        "surface_name": "episodic-memory",
+        "notes": "Episodic daily logs may later summarize into durable memory."
+      },
+      "content": "# 2026-03-12\n\nHydrated from capsule `hello-capsule`.\n"
+    },
+    {
+      "candidate_id": "a2424a83ed8addae",
+      "kind": "procedure.workflow",
+      "suggested_canonical_kind": "procedure.workflow",
+      "surface_name": "skill-root",
+      "source_path": "skills/onboarding/SKILL.md",
+      "candidate_path_hint": ".oac/candidates/openclaw/skills/onboarding.md",
+      "summary": "onboarding",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills",
+        "relative_path": "skills/onboarding/SKILL.md",
+        "surface_name": "skill-root"
+      },
+      "content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n"
+    }
+  ]
+}

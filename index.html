@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Agent Capsule (OAC)</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.5;
+            color: #000;
+            background-color: #fff;
+        }
+        h1 { font-size: 24pt; border-bottom: 1px solid #000; padding-bottom: 10px; }
+        h2 { font-size: 18pt; margin-top: 30px; }
+        h3 { font-size: 14pt; margin-top: 20px; font-style: italic; }
+        hr { border: 0; border-top: 1px solid #000; margin: 20px 0; }
+        ul { list-style-type: square; }
+        .footer-note { font-size: 10pt; color: #666; margin-top: 50px; text-align: center; }
+        a { color: #000; text-decoration: underline; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>Open Agent Capsule (OAC)</h1>
+    <p><strong>Specification and toolkit for portable agent state.</strong></p>
+
+    <p>Open Agent Capsule is a file-first format for maintaining agent identity, persona, procedures, and memory as a versioned, portable canonical artifact.</p>
+
+    <hr>
+
+    <h2>System Utility</h2>
+    
+    <h3>1. Decoupled State and Execution</h3>
+    <p>OAC separates the agent's core instructions and memory from the specific execution harness. This enables the migration of an agent's state between different models and tools without data loss or manual re-prompting.</p>
+
+    <h3>2. Verified Intelligence Supply Chain</h3>
+    <p>OAC implements an asymmetric signing path (SSH-Ed25519). Updates to an agent's state must pass structural evaluation gates and be signed before they are promoted. This ensures that the agent's behavior is traceable to a verified source.</p>
+
+    <h3>3. Targeted Context Selection</h3>
+    <p>Using structural indexing and selective hydration, OAC allows agents to load only the specific records required for a task. This reduces data processing requirements and improves the precision of agent responses.</p>
+
+    <hr>
+
+    <h2>Architecture</h2>
+    <ul>
+        <li><strong>Canonical Layer:</strong> Markdown/YAML/JSON source of truth.</li>
+        <li><strong>Adapter Layer:</strong> Bidirectional compilers for Codex, Claude Code, Gemini, and OpenClaw.</li>
+        <li><strong>Orchestration Layer:</strong> Model Context Protocol (MCP) server for record discovery and learning loops.</li>
+        <li><strong>Distribution Layer:</strong> Deterministic snapshots with polymorphic signatures.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Operational Status</h2>
+    <pre>
+$ oac targets
+codex
+openclaw
+claude-code
+opencode
+gemini
+mcp
+webmcp
+    </pre>
+
+    <hr>
+
+    <h2>Project Resources</h2>
+    <ul>
+        <li><a href="https://github.com/adpena/oac">Source Repository</a></li>
+        <li><a href="docs/RATIONALE.md">Project Rationale</a></li>
+        <li><a href="docs/spec/README.md">Normative Specifications</a></li>
+    </ul>
+
+    <div class="footer-note">
+        Open Agent Capsule &copy; 2026. All rights reserved.
+    </div>
+
+</body>
+</html>

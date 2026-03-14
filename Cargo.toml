@@ -1,0 +1,17 @@
+[package]
+name = "oac-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oac_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] }
+jwalk = "0.8"
+globset = "0.4"
+sha2 = "0.10"
+similar = "2.5"
+hex = "0.4"
+rayon = "1.10"

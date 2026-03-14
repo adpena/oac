@@ -1,0 +1,8 @@
+# Memory
+
+- The canonical artifact is an Open Agent Capsule.
+- Adapter profiles customize harness-specific surfaces without changing canonical meaning.
+- MCP is an access surface, not the canonical storage layer.
+- Prefer file-first architecture.
+- Prefer deterministic tests over vague scaffolding.
+- Keep launch language honest about what is implemented versus scaffolded.

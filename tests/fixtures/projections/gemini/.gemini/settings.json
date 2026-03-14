@@ -1,0 +1,13 @@
+{
+  "experimental": {
+    "enableAgents": true
+  },
+  "mcpServers": {
+    "oac": {
+      "command": "oac",
+      "args": [
+        "serve-mcp"
+      ]
+    }
+  }
+}

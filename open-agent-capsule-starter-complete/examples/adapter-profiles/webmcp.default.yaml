@@ -1,0 +1,25 @@
+format: oac.adapter-profile.v0
+profile_name: webmcp.default
+target: webmcp
+description: Browser-facing read-only WebMCP companion surface.
+surfaces:
+- name: capsule-summary
+  path: webmcp://capsule/summary
+  ownership_mode: managed-file
+  portability: portable
+  notes: Browser-readable capsule summary surface.
+- name: search-memory
+  path: webmcp://capsule/tools/search-memory
+  ownership_mode: managed-file
+  portability: portable
+  notes: Read-only browser-invocable search tool.
+flags:
+- name: read_only
+  cli_name: --read-only
+  harness_name: webmcp.readOnly
+  type: bool
+  default: true
+  description: Keep the launch WebMCP surface strictly read-only.
+mappings: []
+hooks: []
+wrappers: []

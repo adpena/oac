@@ -1,0 +1,37 @@
+format: oac.adapter-profile.v0
+profile_name: mcp.default
+target: mcp
+description: Read-only MCP surface for manifest, memory, and projection metadata.
+surfaces:
+- name: manifest-resource
+  path: mcp://capsule/manifest
+  ownership_mode: managed-file
+  portability: portable
+  notes: Read-only manifest resource.
+- name: identity-resource
+  path: mcp://capsule/identity
+  ownership_mode: managed-file
+  portability: portable
+  notes: Read-only identity summary resource.
+- name: memory-search
+  path: mcp://capsule/tools/search-memory
+  ownership_mode: managed-file
+  portability: portable
+  notes: Read-only memory search tool.
+flags:
+- name: read_only
+  cli_name: --read-only
+  harness_name: server.readOnly
+  type: bool
+  default: true
+  description: Read-only by default until governance for mutation exists.
+mappings:
+- canonical_kind: provenance.record
+  target_surface: manifest-resource
+  target_path: mcp://capsule/manifest
+  mode: resource
+  ownership_mode: managed-file
+  portability: portable
+  notes: MCP exposes metadata but not mutating state.
+hooks: []
+wrappers: []

@@ -1,0 +1,5 @@
+{
+  "capsule_id": "hello-capsule",
+  "target": "mcp",
+  "profile": "mcp.default"
+}

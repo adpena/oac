@@ -1,0 +1,58 @@
+{
+  "target": "codex",
+  "source_root": "codex",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 2,
+    "matched_paths": 2,
+    "candidate_count": 2,
+    "ignored_paths": 0
+  },
+  "notes": [
+    "Projection metadata is ignored during ingest.",
+    "Deep memory remains a future add-on via local files or MCP."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "8f9053bb491d52c3",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "project-rules",
+      "source_path": "AGENTS.md",
+      "candidate_path_hint": ".oac/candidates/codex/project-rules.md",
+      "summary": "## Open Agent Capsule projection",
+      "portability": "portable",
+      "ownership_mode": "managed-section",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "managed-section",
+        "rule": "project-rules",
+        "relative_path": "AGENTS.md",
+        "surface_name": "project-rules",
+        "notes": "Codex durable rules should stay concise and reviewable.",
+        "managed_section_tag": "codex"
+      },
+      "content": "## Open Agent Capsule projection\n\n- Canonical capsule: `hello-capsule`\n- Use `.agents/skills/` for durable workflows.\n- Keep deep memory outside this file and access it via `.oac/codex/` or MCP.\n"
+    },
+    {
+      "candidate_id": "41148a268b160fa6",
+      "kind": "procedure.workflow",
+      "suggested_canonical_kind": "procedure.workflow",
+      "surface_name": "skill-root",
+      "source_path": ".agents/skills/onboarding/SKILL.md",
+      "candidate_path_hint": ".oac/candidates/codex/skills/onboarding.md",
+      "summary": "onboarding",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills",
+        "relative_path": ".agents/skills/onboarding/SKILL.md",
+        "surface_name": "skill-root",
+        "notes": "Codex skills are promoted as durable workflow candidates."
+      },
+      "content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n"
+    }
+  ]
+}

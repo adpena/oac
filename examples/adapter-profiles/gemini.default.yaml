@@ -1,0 +1,100 @@
+format: oac.adapter-profile.v0
+profile_name: gemini.default
+target: gemini
+description: Default Gemini CLI projection using GEMINI.md, agents, settings, and
+  extensions.
+surfaces:
+- name: context-file
+  path: GEMINI.md
+  ownership_mode: managed-file
+  portability: portable
+  notes: Primary hierarchical context file for Gemini CLI.
+- name: imported-instructions
+  path: .oac/gemini/instructions/*.md
+  ownership_mode: imported-file
+  portability: portable
+  notes: Imported markdown fragments referenced from GEMINI.md.
+- name: agent-root
+  path: .gemini/agents
+  ownership_mode: managed-file
+  portability: portable
+  notes: Experimental/custom Gemini agents with YAML frontmatter.
+- name: settings
+  path: .gemini/settings.json
+  ownership_mode: managed-file
+  portability: portable
+  notes: Gemini CLI settings including MCP and agent toggles.
+- name: extension-root
+  path: .gemini/extensions/oac
+  ownership_mode: managed-file
+  portability: portable
+  notes: Optional extension surface for hooks, commands, and shared agent assets.
+flags:
+- name: context_file_name
+  cli_name: --context-file-name
+  harness_name: GEMINI.md
+  type: string
+  default: GEMINI.md
+  description: Canonical filename for Gemini instructional memory.
+- name: use_imports
+  cli_name: --use-imports
+  harness_name: '@file imports'
+  type: bool
+  default: true
+  description: Use GEMINI.md imports to keep the root file concise.
+- name: emit_agents
+  cli_name: --emit-agents
+  harness_name: experimental.enableAgents
+  type: bool
+  default: true
+  description: Emit Gemini agents and enable them in settings.
+- name: emit_mcp_servers
+  cli_name: --emit-mcp-servers
+  harness_name: mcpServers
+  type: bool
+  default: true
+  description: Register OAC resources and tools in Gemini settings.json.
+- name: memory_refresh_command
+  cli_name: --memory-refresh-command
+  harness_name: /memory refresh
+  type: string
+  default: /memory refresh
+  description: Document or wrap the refresh command after regeneration.
+mappings:
+- canonical_kind: behavior.rule
+  target_surface: context-file
+  target_path: GEMINI.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: High-value instructions stay in the root GEMINI.md with imports for depth.
+- canonical_kind: memory.semantic
+  target_surface: imported-instructions
+  target_path: .oac/gemini/instructions/{topic}.md
+  mode: imported-file
+  ownership_mode: imported-file
+  portability: portable
+  notes: Semantic memory is imported into GEMINI.md rather than inlined indefinitely.
+- canonical_kind: skill.bundle
+  target_surface: agent-root
+  target_path: .gemini/agents/{agent_name}.md
+  mode: managed-file
+  ownership_mode: managed-file
+  portability: portable
+  notes: Capsule slices can become Gemini subagents with frontmatter.
+hooks:
+- name: zig-post-hydrate-refresh-hint
+  phase: post-hydrate
+  runtime: zig
+  entrypoint: examples/hooks/zig/post_hydrate_notice.zig
+  enabled: false
+  timeout_seconds: 30
+  args: []
+  env: {}
+  notes: Starter example showing how a tiny Zig helper can emit refresh or sync hints.
+wrappers:
+- name: gemini-default
+  command:
+  - gemini
+  env: {}
+  notes: Use this wrapper and adapt auth or sandbox flags locally.

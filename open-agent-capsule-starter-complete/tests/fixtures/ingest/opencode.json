@@ -1,0 +1,169 @@
+{
+  "target": "opencode",
+  "source_root": "opencode",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 7,
+    "matched_paths": 7,
+    "candidate_count": 7,
+    "ignored_paths": 0
+  },
+  "notes": [
+    "OpenCode-specific agents, commands, and plugin hooks may stay target-local after review.",
+    "Config is scanned as signal, not promoted blindly into canonical memory."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "7b42a8d85dde0877",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "project-rules",
+      "source_path": "AGENTS.md",
+      "candidate_path_hint": ".oac/candidates/opencode/project-rules.md",
+      "summary": "Use shared skills from `.agents/skills/` and specialized agents from `.opencode/agents/`.",
+      "portability": "portable",
+      "ownership_mode": "managed-section",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "managed-section",
+        "rule": "project-rules",
+        "relative_path": "AGENTS.md",
+        "surface_name": "project-rules",
+        "managed_section_tag": "opencode"
+      },
+      "content": "Use shared skills from `.agents/skills/` and specialized agents from `.opencode/agents/`.\n"
+    },
+    {
+      "candidate_id": "8f1014012fcdd190",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "project-guidance",
+      "source_path": ".oac/opencode/project-guidance.md",
+      "candidate_path_hint": ".oac/candidates/opencode/project-guidance.md",
+      "summary": "project guidance",
+      "portability": "portable",
+      "ownership_mode": "imported-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "project-guidance",
+        "relative_path": ".oac/opencode/project-guidance.md",
+        "surface_name": "project-guidance"
+      },
+      "content": "# project guidance\n\nKeep generated and human-authored instructions distinct.\n"
+    },
+    {
+      "candidate_id": "41148a268b160fa6",
+      "kind": "procedure.workflow",
+      "suggested_canonical_kind": "procedure.workflow",
+      "surface_name": "skill-root",
+      "source_path": ".agents/skills/onboarding/SKILL.md",
+      "candidate_path_hint": ".oac/candidates/opencode/skills/onboarding.md",
+      "summary": "onboarding",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills",
+        "relative_path": ".agents/skills/onboarding/SKILL.md",
+        "surface_name": "skill-root"
+      },
+      "content": "# onboarding\n\n## Trigger\n\nUse when starting work in the starter repository.\n\n## Steps\n\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\n2. Read the smallest relevant spec.\n3. Move the next incomplete gate with tests and fixture updates.\n4. Keep the canonical layer human-readable.\n"
+    },
+    {
+      "candidate_id": "9d6d2f040baf47de",
+      "kind": "agent.specialist",
+      "suggested_canonical_kind": null,
+      "surface_name": "agent-root",
+      "source_path": ".opencode/agents/reviewer.md",
+      "candidate_path_hint": ".oac/candidates/opencode/agents/reviewer.md",
+      "summary": "reviewer",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "declared_summary": "reviewer",
+        "frontmatter": {
+          "name": "reviewer",
+          "description": "Reviews changes against starter contracts.",
+          "mode": "subagent"
+        },
+        "rule": "agents",
+        "relative_path": ".opencode/agents/reviewer.md",
+        "surface_name": "agent-root"
+      },
+      "content": "---\nname: reviewer\ndescription: Reviews changes against starter contracts.\nmode: subagent\n---\n\nFocus on contract drift, tests, and launch honesty.\n"
+    },
+    {
+      "candidate_id": "5814cb6c7e110112",
+      "kind": "command.template",
+      "suggested_canonical_kind": null,
+      "surface_name": "command-root",
+      "source_path": ".opencode/commands/review.md",
+      "candidate_path_hint": ".oac/candidates/opencode/commands/review.md",
+      "summary": "---",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "frontmatter": {
+          "description": "Review launch-facing artifacts",
+          "agent": "reviewer"
+        },
+        "rule": "commands",
+        "relative_path": ".opencode/commands/review.md",
+        "surface_name": "command-root"
+      },
+      "content": "---\ndescription: Review launch-facing artifacts\nagent: reviewer\n---\n\nReview the changed docs, profiles, and fixtures.\n"
+    },
+    {
+      "candidate_id": "1bbd6c42a8dc93b6",
+      "kind": "hook.logic",
+      "suggested_canonical_kind": null,
+      "surface_name": "plugin-root",
+      "source_path": ".opencode/plugins/oac-hooks.ts",
+      "candidate_path_hint": ".oac/candidates/opencode/plugins/oac-hooks.ts",
+      "summary": "export default {",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "plugin-hooks",
+        "relative_path": ".opencode/plugins/oac-hooks.ts",
+        "surface_name": "plugin-root",
+        "notes": "Plugin logic may remain target-specific even when reviewed in OAC."
+      },
+      "content": "export default {\n  name: \"oac-hooks\",\n  setup() {\n    // starter plugin placeholder for advanced hook/callback logic\n  },\n};\n"
+    },
+    {
+      "candidate_id": "f2bf75d4c417b4ce",
+      "kind": "config.signal",
+      "suggested_canonical_kind": null,
+      "surface_name": "config",
+      "source_path": "opencode.jsonc",
+      "candidate_path_hint": ".oac/candidates/opencode/config.json",
+      "summary": "opencode.jsonc: $schema, instructions, plugin",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "$schema",
+          "instructions",
+          "plugin",
+          "mcp"
+        ],
+        "rule": "config",
+        "relative_path": "opencode.jsonc",
+        "surface_name": "config"
+      },
+      "content": "{\n  \"$schema\": \"https://opencode.ai/config.json\",\n  \"instructions\": [\n    \"AGENTS.md\",\n    \".oac/opencode/project-guidance.md\"\n  ],\n  \"plugin\": [\n    \"./.opencode/plugins/oac-hooks.ts\"\n  ],\n  \"mcp\": {\n    \"oac\": {\n      \"enabled\": true\n    }\n  }\n}\n"
+    }
+  ]
+}

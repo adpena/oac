@@ -1,0 +1,12 @@
+Title,Description,Priority,Status,Assignee,Created,Completed,Labels,Estimate
+Define proposal record schema,"Turn ingest candidates into explicit proposal records with stable IDs, provenance, and promotion intent.",high,Todo,,,"core,learning,schema",5
+Implement propose command,"Compile ingest candidate reports into reviewable proposal bundles without mutating canonical files.",high,Todo,,,"core,learning,cli",5
+Implement promote command,"Promote approved proposal records into canonical files with deterministic diffs and rollback-friendly output.",high,Todo,,,"core,learning",5
+Add eval gate for promotion,"Require deterministic eval checks before promotion writes back to canonical files.",high,Todo,,,"eval,quality",5
+Add candidate/proposal diff tooling,"Create a human-readable diff between candidate bundles, proposal records, and canonical files.",medium,Todo,,,"tooling,diff",3
+Harden Codex ingest classifier,"Improve Codex ingest classification and add stronger round-trip regression tests.",medium,Todo,,,"adapter,codex,ingest",3
+Harden OpenClaw ingest boundaries,"Prove that workspace ingest never crosses into runtime-state sidecars or host-owned state.",medium,Todo,,,"adapter,openclaw,ingest",3
+Harden Claude Code memory promotion policy,"Define how user-local Claude memory topics may or may not promote into shared canonical memory.",medium,Todo,,,"adapter,claude-code,memory",5
+Add signed snapshot packaging,"Package the capsule, proposals, and projection metadata into a signed snapshot format.",medium,Todo,,,"distribution,security",5
+Create conformance suite,"Add adapter conformance cases for ownership, lossiness, profile override behavior, and ingest determinism.",medium,Todo,,,"quality,conformance",5
+Create benchmark suite,"Measure hydrate, ingest, and search cost for representative capsules.",low,Todo,,,"performance,benchmarks",3

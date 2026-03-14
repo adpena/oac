@@ -1,0 +1,77 @@
+format: oac.adapter-profile.v0
+profile_name: claude-code.default
+target: claude-code
+description: Default Claude Code projection split between guidance and local auto-memory.
+surfaces:
+- name: project-guidance
+  path: CLAUDE.md
+  ownership_mode: managed-section
+  portability: portable
+  notes: Shared project instructions with a clear OAC-owned region.
+- name: imported-guidance
+  path: .oac/claude/project-guidance.md
+  ownership_mode: imported-file
+  portability: portable
+  notes: Optional imported guidance file for larger shared instructions.
+- name: memory-index
+  path: memory/MEMORY.md
+  ownership_mode: sidecar
+  portability: user-local
+  notes: Concise index for machine-local auto-memory topics.
+- name: memory-topics
+  path: memory/*.md
+  ownership_mode: sidecar
+  portability: user-local
+  notes: Topic files read on demand by Claude Code memory.
+flags:
+- name: guidance_strategy
+  cli_name: --guidance-strategy
+  harness_name: CLAUDE.md
+  type: enum
+  default: managed-section
+  description: Choose managed section or imported-file projection for shared guidance.
+- name: memory_topic_limit
+  cli_name: --memory-topic-limit
+  harness_name: memory/*.md
+  type: integer
+  default: 8
+  description: Limit topic fan-out so MEMORY.md stays concise.
+- name: emit_local_memory_sidecar
+  cli_name: --emit-local-memory-sidecar
+  harness_name: memory/
+  type: bool
+  default: true
+  description: Emit machine-local memory index and topic files when requested.
+mappings:
+- canonical_kind: behavior.rule
+  target_surface: project-guidance
+  target_path: CLAUDE.md
+  mode: managed-section
+  ownership_mode: managed-section
+  portability: portable
+  notes: Stable project behavior belongs in CLAUDE.md, not auto memory.
+- canonical_kind: memory.semantic
+  target_surface: memory-topics
+  target_path: memory/{topic}.md
+  mode: topic-files
+  ownership_mode: sidecar
+  portability: user-local
+  notes: Claude memory is topic-oriented and machine-local by default.
+- canonical_kind: memory.semantic
+  target_surface: memory-index
+  target_path: memory/MEMORY.md
+  mode: index-file
+  ownership_mode: sidecar
+  portability: user-local
+  notes: MEMORY.md stays concise and routes to detailed topic files.
+hooks:
+- name: post-ingest-curate-memory
+  phase: post-ingest
+  runtime: python
+  entrypoint: examples/hooks/python/post_hydrate_notice.py
+  enabled: false
+  timeout_seconds: 30
+  args: []
+  env: {}
+  notes: Example hook for curating topic files into proposal records.
+wrappers: []

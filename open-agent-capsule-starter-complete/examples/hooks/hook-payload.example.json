@@ -1,0 +1,13 @@
+{
+  "phase": "post-hydrate",
+  "target": "codex",
+  "profile_name": "codex.default",
+  "capsule_root": "./examples/hello-capsule",
+  "work_root": "./worktree",
+  "trace_id": "trace-example-0001",
+  "dry_run": false,
+  "records_changed": 3,
+  "notes": [
+    "example payload for starter hook runtimes"
+  ]
+}

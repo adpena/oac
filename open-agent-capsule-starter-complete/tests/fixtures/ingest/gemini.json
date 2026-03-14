@@ -1,0 +1,158 @@
+{
+  "target": "gemini",
+  "source_root": "gemini",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 6,
+    "matched_paths": 6,
+    "candidate_count": 6,
+    "ignored_paths": 0
+  },
+  "notes": [
+    "Gemini settings and extensions are scanned as structured signal, not canonical truth.",
+    "Imported markdown is preferred over stuffing the root file indefinitely."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "d195720c2c38004c",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "context-file",
+      "source_path": "GEMINI.md",
+      "candidate_path_hint": ".oac/candidates/gemini/context-file.md",
+      "summary": "GEMINI.md",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "context-file",
+        "relative_path": "GEMINI.md",
+        "surface_name": "context-file"
+      },
+      "content": "# GEMINI.md\n\nKeep this file concise.\n\n@.oac/gemini/instructions/project-rules.md\n"
+    },
+    {
+      "candidate_id": "6f9651d6684f1399",
+      "kind": "instruction.fragment",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "imported-instructions",
+      "source_path": ".oac/gemini/instructions/project-rules.md",
+      "candidate_path_hint": ".oac/candidates/gemini/instructions/project-rules.md",
+      "summary": "project rules",
+      "portability": "portable",
+      "ownership_mode": "imported-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "imported-instructions",
+        "relative_path": ".oac/gemini/instructions/project-rules.md",
+        "surface_name": "imported-instructions"
+      },
+      "content": "# project rules\n\n- Prefer imported markdown fragments over one huge context file.\n- Keep settings and extension wiring replaceable.\n- Capsule: `hello-capsule`\n"
+    },
+    {
+      "candidate_id": "a0483ce5f85bed19",
+      "kind": "agent.specialist",
+      "suggested_canonical_kind": null,
+      "surface_name": "agent-root",
+      "source_path": ".gemini/agents/reviewer.md",
+      "candidate_path_hint": ".oac/candidates/gemini/agents/reviewer.md",
+      "summary": "reviewer",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "declared_summary": "reviewer",
+        "frontmatter": {
+          "name": "reviewer",
+          "description": "Reviews starter repository changes.",
+          "kind": "local",
+          "tools": [
+            "read_file",
+            "grep_search"
+          ],
+          "model": "gemini-2.5-pro",
+          "temperature": 0.2,
+          "max_turns": 10
+        },
+        "rule": "agents",
+        "relative_path": ".gemini/agents/reviewer.md",
+        "surface_name": "agent-root"
+      },
+      "content": "---\nname: reviewer\ndescription: Reviews starter repository changes.\nkind: local\ntools:\n  - read_file\n  - grep_search\nmodel: gemini-2.5-pro\ntemperature: 0.2\nmax_turns: 10\n---\n\nAudit changes for schema drift, fixture drift, and launch honesty.\n"
+    },
+    {
+      "candidate_id": "a16dc53c1abe9b44",
+      "kind": "config.signal",
+      "suggested_canonical_kind": null,
+      "surface_name": "settings",
+      "source_path": ".gemini/settings.json",
+      "candidate_path_hint": ".oac/candidates/gemini/settings.json",
+      "summary": "settings.json: experimental, mcpServers",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "experimental",
+          "mcpServers"
+        ],
+        "rule": "settings",
+        "relative_path": ".gemini/settings.json",
+        "surface_name": "settings"
+      },
+      "content": "{\n  \"experimental\": {\n    \"enableAgents\": true\n  },\n  \"mcpServers\": {\n    \"oac\": {\n      \"command\": \"oac\",\n      \"args\": [\n        \"serve-mcp\"\n      ]\n    }\n  }\n}\n"
+    },
+    {
+      "candidate_id": "8465d1e2ae5d6ae8",
+      "kind": "extension.bundle",
+      "suggested_canonical_kind": null,
+      "surface_name": "extension-root",
+      "source_path": ".gemini/extensions/oac/gemini-extension.json",
+      "candidate_path_hint": ".oac/candidates/gemini/extensions/gemini-extension.json",
+      "summary": "gemini-extension.json: name, version",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "name",
+          "version"
+        ],
+        "rule": "extension-manifest",
+        "relative_path": ".gemini/extensions/oac/gemini-extension.json",
+        "surface_name": "extension-root"
+      },
+      "content": "{\n  \"name\": \"oac-extension\",\n  \"version\": \"0.1.0\"\n}\n"
+    },
+    {
+      "candidate_id": "e58aa90949b62070",
+      "kind": "hook.bundle",
+      "suggested_canonical_kind": null,
+      "surface_name": "extension-root",
+      "source_path": ".gemini/extensions/oac/hooks/hooks.json",
+      "candidate_path_hint": ".oac/candidates/gemini/hooks/hooks.json",
+      "summary": "hooks.json: postHydrate",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "json",
+        "parsed": true,
+        "top_level_keys": [
+          "postHydrate"
+        ],
+        "rule": "hook-bundles",
+        "relative_path": ".gemini/extensions/oac/hooks/hooks.json",
+        "surface_name": "extension-root"
+      },
+      "content": "{\n  \"postHydrate\": [\n    {\n      \"command\": \"zig\",\n      \"args\": [\n        \"run\",\n        \"examples/hooks/zig/post_hydrate_notice.zig\"\n      ]\n    }\n  ]\n}\n"
+    }
+  ]
+}

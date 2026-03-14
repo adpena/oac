@@ -1,0 +1,16 @@
+{
+  "target": "mcp",
+  "source_root": "mcp",
+  "support": "read-only",
+  "stats": {
+    "scanned_paths": 0,
+    "matched_paths": 0,
+    "candidate_count": 0,
+    "ignored_paths": 0,
+    "unchanged_count": 0
+  },
+  "notes": [
+    "Promoting MCP-originating changes requires a future governed mutation protocol."
+  ],
+  "candidates": []
+}

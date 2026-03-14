@@ -1,0 +1,8 @@
+{
+  "postHydrate": [
+    {
+      "command": "zig",
+      "args": ["run", "examples/hooks/zig/post_hydrate_notice.zig"]
+    }
+  ]
+}

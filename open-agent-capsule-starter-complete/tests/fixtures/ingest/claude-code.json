@@ -1,0 +1,115 @@
+{
+  "target": "claude-code",
+  "source_root": "claude-code",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 5,
+    "matched_paths": 5,
+    "candidate_count": 5,
+    "ignored_paths": 0
+  },
+  "notes": [
+    "Claude local memory is treated as user-local even when exported for review.",
+    "MEMORY.md is an index, so topic files carry most durable signal."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "cab1176ef3c79c1e",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "project-guidance",
+      "source_path": "CLAUDE.md",
+      "candidate_path_hint": ".oac/candidates/claude-code/project-guidance.md",
+      "summary": "CLAUDE.md",
+      "portability": "portable",
+      "ownership_mode": "managed-section",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "project-guidance",
+        "relative_path": "CLAUDE.md",
+        "surface_name": "project-guidance",
+        "notes": "CLAUDE.md is usually a concise shell around imported guidance."
+      },
+      "content": "# CLAUDE.md\n\nSee `.oac/claude/project-guidance.md` for the OAC-managed shared guidance.\n"
+    },
+    {
+      "candidate_id": "cf8dd791eb05a265",
+      "kind": "behavior.rule",
+      "suggested_canonical_kind": "behavior.rule",
+      "surface_name": "imported-guidance",
+      "source_path": ".oac/claude/project-guidance.md",
+      "candidate_path_hint": ".oac/candidates/claude-code/imported-guidance.md",
+      "summary": "Project guidance",
+      "portability": "portable",
+      "ownership_mode": "imported-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "imported-guidance",
+        "relative_path": ".oac/claude/project-guidance.md",
+        "surface_name": "imported-guidance"
+      },
+      "content": "# Project guidance\n\n- Keep MEMORY.md concise.\n- Promote durable learnings back into the capsule.\n- Capsule: `hello-capsule`\n"
+    },
+    {
+      "candidate_id": "209fb8ebfbbf50b3",
+      "kind": "memory.index",
+      "suggested_canonical_kind": null,
+      "surface_name": "memory-index",
+      "source_path": "memory/MEMORY.md",
+      "candidate_path_hint": ".oac/candidates/claude-code/memory/index.md",
+      "summary": "MEMORY.md",
+      "portability": "user-local",
+      "ownership_mode": "sidecar",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "memory-index",
+        "relative_path": "memory/MEMORY.md",
+        "surface_name": "memory-index"
+      },
+      "content": "# MEMORY.md\n\n- architecture -> `architecture.md`\n- preferences -> `preferences.md`\n"
+    },
+    {
+      "candidate_id": "f64a704f545ba30e",
+      "kind": "memory.semantic",
+      "suggested_canonical_kind": "memory.semantic",
+      "surface_name": "memory-topics",
+      "source_path": "memory/architecture.md",
+      "candidate_path_hint": ".oac/candidates/claude-code/memory/architecture.md",
+      "summary": "architecture",
+      "portability": "user-local",
+      "ownership_mode": "sidecar",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "memory-topics",
+        "relative_path": "memory/architecture.md",
+        "surface_name": "memory-topics",
+        "notes": "Topic files are machine-local by default and should promote deliberately."
+      },
+      "content": "# architecture\n\n- The canonical artifact is an Open Agent Capsule.\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\n- MCP is an access surface, not the canonical storage layer.\n"
+    },
+    {
+      "candidate_id": "453b10ea36f5578c",
+      "kind": "memory.semantic",
+      "suggested_canonical_kind": "memory.semantic",
+      "surface_name": "memory-topics",
+      "source_path": "memory/preferences.md",
+      "candidate_path_hint": ".oac/candidates/claude-code/memory/preferences.md",
+      "summary": "preferences",
+      "portability": "user-local",
+      "ownership_mode": "sidecar",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "memory-topics",
+        "relative_path": "memory/preferences.md",
+        "surface_name": "memory-topics",
+        "notes": "Topic files are machine-local by default and should promote deliberately."
+      },
+      "content": "# preferences\n\n- Prefer file-first architecture.\n- Prefer deterministic tests over vague scaffolding.\n- Keep launch language honest about what is implemented versus scaffolded.\n"
+    }
+  ]
+}

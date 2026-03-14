@@ -1,0 +1,19 @@
+{
+  "target": "webmcp",
+  "capsule_id": "hello-capsule",
+  "source_root": "webmcp",
+  "stats": {
+    "total": 0,
+    "promotable": 0,
+    "noop": 0,
+    "deferred": 0,
+    "target_local": 0,
+    "user_local": 0,
+    "runtime_state": 0,
+    "unsupported": 0
+  },
+  "notes": [
+    "Browser tool invocations stay outside the canonical write path for now."
+  ],
+  "records": []
+}

@@ -1,0 +1,19 @@
+{
+  "target": "mcp",
+  "capsule_id": "hello-capsule",
+  "source_root": "mcp",
+  "stats": {
+    "total": 0,
+    "promotable": 0,
+    "noop": 0,
+    "deferred": 0,
+    "target_local": 0,
+    "user_local": 0,
+    "runtime_state": 0,
+    "unsupported": 0
+  },
+  "notes": [
+    "Promoting MCP-originating changes requires a future governed mutation protocol."
+  ],
+  "records": []
+}
