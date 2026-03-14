@@ -73,7 +73,7 @@ Status: done
 - multi-writer sync and merge policies with conflict resolution
 - stable record IDs enable robust long-term provenance
 
-## Current instruction
+## Current focus
 
 The core loop, review seam, and performance optimizations are complete. 
 The next highest-leverage step is proving **asymmetric trust distribution** and **multi-agent merge flows** in a shared environment.

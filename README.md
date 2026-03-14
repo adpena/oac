@@ -1,6 +1,10 @@
 # Open Agent Capsule (OAC)
 
-OAC is a file-first specification and toolkit for managing agent state (identity, persona, procedures, and memory) as a versioned, portable canonical artifact. It addresses the challenge of agent state being trapped in proprietary harness configurations or model-specific blobs.
+[![CI](https://github.com/adpena/oac/actions/workflows/ci.yml/badge.svg)](https://github.com/adpena/oac/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+
+A file-first specification and toolkit for managing agent state as a versioned, portable canonical artifact. Identity, persona, procedures, and memory live in plain files — not trapped in proprietary harness configurations or model-specific blobs.
 
 ## System Goals
 
@@ -22,34 +26,40 @@ OAC is implemented for the following targets:
 - **OpenCode:** Generic project surfaces.
 - **MCP / WebMCP:** Discovery and bridge protocols.
 
-## Installation
+## Quick Start
 
 ```bash
-uv venv
-source .venv/bin/activate
+# Requires Python 3.11+ and a Rust toolchain
+uv venv && source .venv/bin/activate
 uv pip install -e ".[dev]"
-make check
+
+oac targets                                    # list supported harnesses
+oac validate examples/hello-capsule            # verify a capsule
+oac hydrate claude-code examples/hello-capsule ./workspace  # project to Claude Code
 ```
 
-## Functional Core
+## Core Loop
 
 ```bash
 # 1. Project the capsule for a target
 oac hydrate claude-code examples/hello-capsule ./workspace
 
-# 2. Ingest edits and generate a verified proposal
-oac learn claude-code ./workspace examples/hello-capsule
+# 2. Scan native edits into typed candidates
+oac ingest claude-code ./workspace examples/hello-capsule
 
-# 3. Apply the proposal to the canonical files
+# 3. Turn candidates into a reviewable proposal
+oac propose claude-code ./workspace examples/hello-capsule
+
+# 4. Apply the proposal to the canonical files
 oac promote <proposal-path> examples/hello-capsule --apply
 
-# 4. Release a signed snapshot
+# 5. Release a signed snapshot
 oac snapshot examples/hello-capsule ./releases --sign-key ~/.ssh/id_ed25519
 ```
 
 ## Documentation
 
 - [Project Rationale](docs/RATIONALE.md)
+- [Business Case](docs/BUSINESS_CASE.md)
 - [Usage Scenarios](examples/scenarios/README.md)
 - [Normative Specifications](docs/spec/README.md)
-- [Project Homepage](index.html)

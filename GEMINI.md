@@ -50,6 +50,7 @@ uv pip install -e ".[dev]"
 - `index <capsule> <output>`: Generate a lexical keyword index.
 - `structural-index <capsule> <output>`: Generate a high-level kind and tag index.
 - `policy`: Show current OAC format and compatibility policies.
+- `ack <target> <capsule>`: Run the Adapter Conformance Kit for a single target.
 - `conformance <capsule>`: Run hydrate+ingest checks across all enabled targets.
 - `serve-mcp <capsule>`: Start the OAC MCP server for record discovery.
 

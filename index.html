@@ -39,7 +39,7 @@
     <p>OAC separates the agent's core instructions and memory from the specific execution harness. This enables the migration of an agent's state between different models and tools without data loss or manual re-prompting.</p>
 
     <h3>2. Verified Intelligence Supply Chain</h3>
-    <p>OAC implements an asymmetric signing path (SSH-Ed25519). Updates to an agent's state must pass structural evaluation gates and be signed before they are promoted. This ensures that the agent's behavior is traceable to a verified source.</p>
+    <p>OAC implements a cryptographic signing path (HMAC-SHA256 locally, with SSH-Ed25519 support for release distribution). Updates to an agent's state must pass structural evaluation gates and be signed before they are promoted. This ensures that the agent's behavior is traceable to a verified source.</p>
 
     <h3>3. Targeted Context Selection</h3>
     <p>Using structural indexing and selective hydration, OAC allows agents to load only the specific records required for a task. This reduces data processing requirements and improves the precision of agent responses.</p>
@@ -49,7 +49,7 @@
     <h2>Architecture</h2>
     <ul>
         <li><strong>Canonical Layer:</strong> Markdown/YAML/JSON source of truth.</li>
-        <li><strong>Adapter Layer:</strong> Bidirectional compilers for Codex, Claude Code, Gemini, and OpenClaw.</li>
+        <li><strong>Adapter Layer:</strong> Bidirectional compilers for Codex, Claude Code, Gemini, OpenClaw, and OpenCode.</li>
         <li><strong>Orchestration Layer:</strong> Model Context Protocol (MCP) server for record discovery and learning loops.</li>
         <li><strong>Distribution Layer:</strong> Deterministic snapshots with polymorphic signatures.</li>
     </ul>
@@ -78,7 +78,7 @@ webmcp
     </ul>
 
     <div class="footer-note">
-        Open Agent Capsule &copy; 2026. All rights reserved.
+        Open Agent Capsule &copy; 2026. Licensed under Apache-2.0.
     </div>
 
 </body>
