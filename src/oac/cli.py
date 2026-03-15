@@ -41,6 +41,54 @@ from oac.snapshot import create_snapshot, snapshot_report_to_dict
 from oac.workflows import create_promotion_workflow, write_workflow
 
 
+def _sync_dolt_to_staging(capsule_root: Path, dry_run: bool = False) -> int:
+    """Sync Dolt shared memory into .oac/staging/memory/ instead of writing directly."""
+    import datetime
+
+    staging = capsule_root / ".oac" / "staging" / "memory"
+
+    try:
+        import sys as _sys
+
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent / "fleet"))
+        from agent.dolt import DoltClient
+
+        client = DoltClient()
+        conn = client._conn()
+        with conn.cursor() as cur:
+            cur.execute("SELECT * FROM shared_memory ORDER BY ts DESC LIMIT 50")
+            entries = cur.fetchall()
+        conn.close()
+    except Exception as e:
+        print(f"Dolt unavailable ({e}), skipping memory sync")
+        return 0
+
+    if not entries:
+        print("sync-dolt: no entries to sync")
+        return 0
+
+    by_date: dict[str, list[dict]] = {}
+    for entry in entries:
+        dt = datetime.datetime.fromtimestamp(entry["ts"])
+        day = dt.strftime("%Y-%m-%d")
+        by_date.setdefault(day, []).append(entry)
+
+    if dry_run:
+        print(f"sync-dolt: would stage {len(entries)} entries across {len(by_date)} days")
+        return 0
+
+    staging.mkdir(parents=True, exist_ok=True)
+    for day, day_entries in by_date.items():
+        path = staging / f"{day}.md"
+        lines = [f"---\nkind: memory.episodic\nsummary: Experiences from {day}\n---\n\n"]
+        for e in day_entries:
+            lines.append(f"- [{e['machine']}/{e['agent_id']}] {e['content']}\n")
+        path.write_text("".join(lines))
+
+    print(f"sync-dolt: staged {len(entries)} entries across {len(by_date)} days -> {staging}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="oac", description="Open Agent Capsule toolkit")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -224,6 +272,17 @@ def build_parser() -> argparse.ArgumentParser:
     workflow = subparsers.add_parser("workflow", help="Manage a promotion workflow")
     workflow.add_argument("proposal", type=Path, help="Path to proposal bundle JSON")
     workflow.add_argument("output", type=Path, help="Path to write the workflow JSON")
+
+    sync = subparsers.add_parser(
+        "sync",
+        help="Full two-way sync cycle: Dolt->staging, ingest, propose, auto-promote, hydrate",
+    )
+    sync.add_argument("capsule", type=Path, help="Path to capsule root")
+    sync.add_argument("--target", required=True, help="Harness target name (e.g. openclaw)")
+    sync.add_argument("--workspace", type=Path, help="Workspace directory to ingest from / hydrate to")
+    sync.add_argument("--profile", type=Path, help="Optional custom adapter profile")
+    sync.add_argument("--auto-promote", action="store_true", help="Auto-promote noop + promotable candidates")
+    sync.add_argument("--dry-run", action="store_true", help="Report what would happen without writing")
 
     return parser
 
@@ -602,6 +661,115 @@ def cmd_serve_mcp(capsule: Path) -> int:
     return 0
 
 
+def cmd_sync(
+    capsule: Path,
+    target: str,
+    workspace: Path | None,
+    profile: Path | None,
+    auto_promote: bool,
+    dry_run: bool,
+) -> int:
+    """Full two-way sync cycle through the proposal gate."""
+    import tempfile
+
+    capsule = capsule.resolve()
+    print(f"=== OAC Sync: {target} ===")
+    print(f"capsule: {capsule}")
+    if workspace:
+        print(f"workspace: {workspace}")
+    print(f"auto-promote: {auto_promote}")
+    print(f"dry-run: {dry_run}")
+    print()
+
+    # Step 1: Dolt -> staging
+    print("--- Step 1: Dolt -> staging ---")
+    _sync_dolt_to_staging(capsule, dry_run=dry_run)
+    print()
+
+    # Determine ingest source: staging dir first, then workspace
+    staging_memory = capsule / ".oac" / "staging" / "memory"
+    ingest_source = workspace if workspace else staging_memory
+    if not ingest_source.exists():
+        print(f"No ingest source found at {ingest_source}, nothing to sync")
+        return 0
+
+    # Step 2: Ingest — scan workspace/staging into candidates
+    print("--- Step 2: Ingest ---")
+    get_target(target)
+    adapter = get_adapter(target)
+    ingest_report = adapter.ingest(
+        source_root=ingest_source,
+        capsule_root=capsule,
+        options=AdapterOptions(
+            dry_run=dry_run,
+            profile_path=str(profile) if profile else None,
+        ),
+    )
+    print(f"ingested: {ingest_report.target}")
+    print(f"candidates: {ingest_report.stats.candidate_count}")
+    print(f"unchanged: {ingest_report.stats.unchanged_count}")
+    print()
+
+    if ingest_report.stats.candidate_count == 0:
+        print("No candidates found, sync complete.")
+        return 0
+
+    # Step 3: Create proposal bundle
+    print("--- Step 3: Propose ---")
+    bundle = create_proposal_bundle(capsule, ingest_report)
+    print(render_proposal_bundle(bundle))
+    print()
+
+    # Save the bundle to .oac/sync/
+    sync_dir = capsule / ".oac" / "sync"
+    if not dry_run:
+        sync_dir.mkdir(parents=True, exist_ok=True)
+        bundle_path = sync_dir / "latest-proposal.json"
+        write_proposal_bundle(bundle, bundle_path)
+        print(f"proposal saved: {bundle_path}")
+
+    # Step 4: Auto-promote noop candidates; promote promotable if --auto-promote
+    noop_count = bundle.stats.noop
+    promotable_count = bundle.stats.promotable
+    print(f"--- Step 4: Promote (noop={noop_count}, promotable={promotable_count}) ---")
+
+    if auto_promote and promotable_count > 0:
+        if dry_run:
+            print(f"dry-run: would promote {promotable_count} candidates")
+        else:
+            report = preview_promotion(
+                bundle, capsule, apply=True, eval_passed=True
+            )
+            print(f"promoted {report.change_count} changes (promotion_id={report.promotion_id})")
+    elif promotable_count > 0:
+        print(f"{promotable_count} candidates ready for review (use --auto-promote to apply)")
+    else:
+        print("nothing to promote")
+    print()
+
+    # Step 5: Re-hydrate workspace if provided
+    if workspace and not dry_run:
+        print("--- Step 5: Hydrate ---")
+        hydrate_report = adapter.hydrate(
+            capsule_root=capsule,
+            destination=workspace,
+            options=AdapterOptions(
+                profile_path=str(profile) if profile else None,
+            ),
+        )
+        print(f"hydrated: {hydrate_report.target}")
+        print(f"destination: {hydrate_report.destination}")
+        print(f"updated: {hydrate_report.updated_count}")
+        print(f"unchanged: {hydrate_report.unchanged_count}")
+    elif workspace and dry_run:
+        print("--- Step 5: Hydrate ---")
+        print(f"dry-run: would hydrate {workspace}")
+
+    print()
+    print("=== Sync complete ===")
+    return 0
+
+
 def cmd_workflow(proposal: Path, output: Path) -> int:
     bundle = load_proposal_bundle(proposal)
     workflow = create_promotion_workflow(proposal, bundle.capsule_id)
@@ -694,6 +862,15 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_serve_mcp(args.capsule)
     if args.command == "workflow":
         return cmd_workflow(args.proposal, args.output)
+    if args.command == "sync":
+        return cmd_sync(
+            args.capsule,
+            args.target,
+            args.workspace,
+            args.profile,
+            args.auto_promote,
+            args.dry_run,
+        )
 
     parser.error(f"Unknown command: {args.command}")
     return 2
