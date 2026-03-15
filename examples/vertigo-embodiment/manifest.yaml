@@ -32,6 +32,12 @@ targets:
     mode: native-files
     enabled: true
     notes: Emit AGENTS.md with embodiment instructions.
+  - name: qwen-code
+    mode: native-files
+    enabled: true
+    notes: >
+      Emit QWEN.md with suit tool instructions and world knowledge.
+      Memory records project into workspace memory sidecar.
   - name: mcp
     mode: mcp
     enabled: true

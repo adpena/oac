@@ -16,6 +16,7 @@ class HarnessTarget(str, Enum):
     OPENCODE = "opencode"
     GEMINI = "gemini"
     MCP = "mcp"
+    QWEN_CODE = "qwen-code"
     WEBMCP = "webmcp"
 
 

@@ -22,6 +22,7 @@ def _registry():
     from oac.adapters.mcp import MCPAdapter
     from oac.adapters.openclaw import OpenClawAdapter
     from oac.adapters.opencode import OpenCodeAdapter
+    from oac.adapters.qwen_code import QwenCodeAdapter
     from oac.adapters.webmcp import WebMCPAdapter
 
     return {
@@ -31,6 +32,7 @@ def _registry():
         "opencode": OpenCodeAdapter(),
         "gemini": GeminiAdapter(),
         "mcp": MCPAdapter(),
+        "qwen-code": QwenCodeAdapter(),
         "webmcp": WebMCPAdapter(),
     }
 

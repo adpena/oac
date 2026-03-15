@@ -737,6 +737,63 @@ def _webmcp_profile() -> AdapterProfile:
     )
 
 
+def _qwen_code_profile() -> AdapterProfile:
+    return AdapterProfile(
+        profile_name="qwen-code.default",
+        target=HarnessTarget.QWEN_CODE,
+        description="Default Qwen Code workspace projection with QWEN.md and memory sidecar.",
+        surfaces=[
+            SurfaceSpec(
+                name="project-guidance",
+                path="QWEN.md",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Primary workspace guidance surface read by Qwen Code.",
+            ),
+            SurfaceSpec(
+                name="behavior-rules",
+                path="AGENTS.md",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Behavior rules for agent conduct.",
+            ),
+            SurfaceSpec(
+                name="persona",
+                path=".oac/qwen/persona.md",
+                ownership_mode=OwnershipMode.IMPORTED_FILE,
+                notes="Persona projection from capsule identity.",
+            ),
+            SurfaceSpec(
+                name="user-model",
+                path=".oac/qwen/user-model.md",
+                ownership_mode=OwnershipMode.IMPORTED_FILE,
+                notes="User model projection from capsule identity.",
+            ),
+            SurfaceSpec(
+                name="display-identity",
+                path=".oac/qwen/identity.md",
+                ownership_mode=OwnershipMode.IMPORTED_FILE,
+                notes="Display identity projection.",
+            ),
+            SurfaceSpec(
+                name="curated-memory",
+                path=".oac/qwen/memory.md",
+                ownership_mode=OwnershipMode.SIDECAR,
+                portability=PortabilityClass.USER_LOCAL,
+                notes="Curated memory sidecar for workspace knowledge.",
+            ),
+            SurfaceSpec(
+                name="skill-root",
+                path="skills",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Discoverable skill bundles.",
+            ),
+        ],
+        flags=[],
+        mappings=[],
+        hooks=[],
+        wrappers=[],
+    )
+
+
 CATALOG: dict[HarnessTarget, TargetCatalogEntry] = {
     HarnessTarget.CODEX: TargetCatalogEntry(
         target=HarnessTarget.CODEX,
@@ -773,6 +830,12 @@ CATALOG: dict[HarnessTarget, TargetCatalogEntry] = {
         title="MCP",
         summary="Read-only access surface for capsule metadata and memory search.",
         default_profile=_mcp_profile(),
+    ),
+    HarnessTarget.QWEN_CODE: TargetCatalogEntry(
+        target=HarnessTarget.QWEN_CODE,
+        title="Qwen Code",
+        summary="QWEN.md workspace guidance with memory sidecar and discoverable skills.",
+        default_profile=_qwen_code_profile(),
     ),
     HarnessTarget.WEBMCP: TargetCatalogEntry(
         target=HarnessTarget.WEBMCP,
