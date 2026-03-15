@@ -10,9 +10,9 @@ use std::path::Path;
 use similar::{TextDiff, DiffOp};
 
 #[pyfunction]
-fn expand_patterns(py: Python<'_>, root: &str, patterns: Vec<&str>) -> PyResult<Vec<String>> {
+fn expand_patterns(py: Python<'_>, root: &str, patterns: Vec<String>) -> PyResult<Vec<String>> {
     let mut builder = GlobSetBuilder::new();
-    for p in patterns {
+    for p in &patterns {
         builder.add(Glob::new(p).map_err(|e| PyValueError::new_err(e.to_string()))?);
     }
     let set = builder.build().map_err(|e| PyValueError::new_err(e.to_string()))?;
@@ -59,22 +59,22 @@ fn hash_file(py: Python<'_>, path: &str) -> PyResult<String> {
 fn generate_shared_diff(py: Python<'_>, old_text: &str, new_text: &str) -> PyResult<PyObject> {
     let (additions, deletions, unchanged) = py.allow_threads(|| {
         let diff = TextDiff::from_lines(old_text, new_text);
-        let mut additions = 0;
-        let mut deletions = 0;
-        let mut unchanged = 0;
-        
-        for opcode in diff.opcodes() {
-            match opcode {
-                DiffOp::Equal { len, .. } => {
+        let mut additions: usize = 0;
+        let mut deletions: usize = 0;
+        let mut unchanged: usize = 0;
+
+        for op in diff.ops() {
+            match op {
+                DiffOp::Equal { old_index: _, new_index: _, len } => {
                     unchanged += len;
                 }
-                DiffOp::Insert { len, .. } => {
-                    additions += len;
+                DiffOp::Insert { old_index: _, new_index: _, new_len } => {
+                    additions += new_len;
                 }
-                DiffOp::Delete { len, .. } => {
-                    deletions += len;
+                DiffOp::Delete { old_index: _, old_len, new_index: _ } => {
+                    deletions += old_len;
                 }
-                DiffOp::Replace { old_len, new_len, .. } => {
+                DiffOp::Replace { old_index: _, old_len, new_index: _, new_len } => {
                     deletions += old_len;
                     additions += new_len;
                 }

@@ -237,6 +237,7 @@ dependencies = [
  "hex",
  "jwalk",
  "pyo3",
+ "rayon",
  "sha2",
  "similar",
 ]
