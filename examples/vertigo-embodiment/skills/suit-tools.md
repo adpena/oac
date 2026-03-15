@@ -5,7 +5,7 @@ summary: Suit SDK MCP tools for Roblox embodiment
 
 # Suit SDK Tools
 
-Available through the Fleet MCP server at `http://example-host.test:8850/mcp`.
+Available through the Fleet MCP server at `http://mini-host.example.test:8850/mcp`.
 
 ## Core (use these most)
 - **suit_do** — One-shot: compile + execute + return results. Accepts JSON, turtle, or natural language.
