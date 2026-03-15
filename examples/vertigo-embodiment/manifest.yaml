@@ -1,0 +1,40 @@
+format: oac.v0
+capsule_id: vertigo-embodiment
+name: Vertigo Embodiment Agent
+description: >
+  An AI agent embodied in the Vertigo Roblox world. Perceives through rich
+  qualia synthesis, acts through the Suit SDK behavior tree compiler, and
+  communicates through thought bubbles and proximity chat. Designed for
+  autonomous exploration, building, and social interaction.
+created_at: 2026-03-15T00:00:00Z
+owners:
+  - adpena
+canonical_paths:
+  identity: identity
+  memory: memory
+  procedures: procedures
+  skills: skills
+  provenance: provenance
+targets:
+  - name: openclaw
+    mode: native-files
+    enabled: true
+    notes: >
+      Primary target. Projects SOUL.md, HEARTBEAT.md, WORLD.md, IDENTITY.md
+      into OpenClaw workspace. Memory records become workspace/memory/*.md.
+  - name: claude-code
+    mode: native-files
+    enabled: true
+    notes: >
+      Emit CLAUDE.md with suit tool instructions, memory sidecar for
+      world knowledge, and MCP server configuration for fleet access.
+  - name: codex
+    mode: native-files
+    enabled: true
+    notes: Emit AGENTS.md with embodiment instructions.
+  - name: mcp
+    mode: mcp
+    enabled: true
+    notes: >
+      Expose capsule records as MCP resources. The fleet MCP server
+      can serve capsule state alongside suit tools.
