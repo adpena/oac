@@ -22,7 +22,7 @@ The project enables bidirectional synchronization between this canonical capsule
 - **Validation/Models:** Pydantic v2
 - **Data Formats:** YAML (PyYAML), JSON, Markdown
 - **Tooling:** Ruff (Linting/Formatting), Pytest (Testing)
-- **Build System:** Setuptools (pyproject.toml)
+- **Build System:** Maturin (pyproject.toml)
 
 ## Building and Running
 
