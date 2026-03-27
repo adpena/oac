@@ -6,7 +6,7 @@ from oac.adapters.base import AdapterOptions
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "examples" / "hello-capsule"
 FIXTURES = ROOT / "tests" / "fixtures" / "projections"
-TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp"]
+TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp", "roblox-embodiment"]
 
 
 def _tree(root: Path) -> dict[str, str]:

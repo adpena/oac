@@ -23,6 +23,7 @@ def _registry():
     from oac.adapters.openclaw import OpenClawAdapter
     from oac.adapters.opencode import OpenCodeAdapter
     from oac.adapters.qwen_code import QwenCodeAdapter
+    from oac.adapters.roblox_embodiment import RobloxEmbodimentAdapter
     from oac.adapters.webmcp import WebMCPAdapter
 
     return {
@@ -34,6 +35,7 @@ def _registry():
         "mcp": MCPAdapter(),
         "qwen-code": QwenCodeAdapter(),
         "webmcp": WebMCPAdapter(),
+        "roblox-embodiment": RobloxEmbodimentAdapter(),
     }
 
 

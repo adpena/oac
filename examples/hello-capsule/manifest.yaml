@@ -41,3 +41,7 @@ targets:
     mode: mcp
     enabled: true
     notes: Expose browser-facing read-only views.
+  - name: roblox-embodiment
+    mode: native-files
+    enabled: true
+    notes: Emit Luau agent-config tables for embodied Roblox agents.

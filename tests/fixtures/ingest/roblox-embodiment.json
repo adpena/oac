@@ -1,0 +1,98 @@
+{
+  "target": "roblox-embodiment",
+  "source_root": "roblox-embodiment",
+  "support": "partial",
+  "stats": {
+    "scanned_paths": 4,
+    "matched_paths": 4,
+    "candidate_count": 4,
+    "ignored_paths": 0,
+    "unchanged_count": 0
+  },
+  "notes": [
+    "Projection metadata (manifest.json) is ignored during ingest.",
+    "Motion and audit logs are runtime-state and stay as sidecars."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "dee6062331b1fc50",
+      "kind": "skill.bundle",
+      "suggested_canonical_kind": "skill.bundle",
+      "surface_name": "skills-config",
+      "source_path": "agent-config/skills.luau",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/skills.luau",
+      "summary": "--!strict",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills-config",
+        "relative_path": "agent-config/skills.luau",
+        "surface_name": "skills-config",
+        "notes": "Luau skill definitions scanned back as skill bundles."
+      },
+      "content": "--!strict\nreturn {\n    {\n        name = \"onboarding\",\n        content = \"# onboarding\\n\\n## Trigger\\n\\nUse when starting work in the starter repository.\\n\\n## Steps\\n\\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\\n2. Read the smallest relevant spec.\\n3. Move the next incomplete gate with tests and fixture updates.\\n4. Keep the canonical layer human-readable.\\n\",\n    },\n}\n"
+    },
+    {
+      "candidate_id": "8a5cdd7694c7f3b8",
+      "kind": "identity.persona",
+      "suggested_canonical_kind": "identity.persona",
+      "surface_name": "persona-config",
+      "source_path": "agent-config/persona.luau",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/persona.luau",
+      "summary": "--!strict",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "persona-config",
+        "relative_path": "agent-config/persona.luau",
+        "surface_name": "persona-config",
+        "notes": "Persona config scanned back as identity candidate."
+      },
+      "content": "--!strict\nreturn {\n    displayName = \"4a438a3cfb0a\",\n    displayIdentity = \"Hello Capsule is a calm, implementation-oriented assistant capsule used for starter validation.\",\n    persona = \"Prefer concrete, testable changes. Keep instructions concise and durable.\",\n    userModel = \"The user prefers practical design, explicit contracts, and launch-ready examples.\",\n}\n"
+    },
+    {
+      "candidate_id": "a9dde20afde19386",
+      "kind": "memory.semantic",
+      "suggested_canonical_kind": "memory.semantic",
+      "surface_name": "memory-config",
+      "source_path": "agent-config/memory.luau",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/memory.luau",
+      "summary": "--!strict",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "memory-config",
+        "relative_path": "agent-config/memory.luau",
+        "surface_name": "memory-config",
+        "notes": "Semantic memory config scanned back as memory candidate."
+      },
+      "content": "--!strict\nreturn {\n    {\n        key = \"product-decisions.memory\",\n        kind = \"memory.semantic\",\n        body = \"- The canonical artifact is an Open Agent Capsule.\\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\\n- MCP is an access surface, not the canonical storage layer.\",\n    },\n    {\n        key = \"user-preferences.memory\",\n        kind = \"memory.semantic\",\n        body = \"- Prefer file-first architecture.\\n- Prefer deterministic tests over vague scaffolding.\\n- Keep launch language honest about what is implemented versus scaffolded.\",\n    },\n}\n"
+    },
+    {
+      "candidate_id": "2e581d66a95e5fc6",
+      "kind": "procedure.patrol",
+      "suggested_canonical_kind": "procedure.patrol",
+      "surface_name": "patrol-config",
+      "source_path": "agent-config/patrols.luau",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/patrols.luau",
+      "summary": "--!strict",
+      "portability": "portable",
+      "ownership_mode": "managed-file",
+      "lossiness": "partially-lossless",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "patrol-config",
+        "relative_path": "agent-config/patrols.luau",
+        "surface_name": "patrol-config",
+        "notes": "Patrol config scanned back as procedure candidates."
+      },
+      "content": "--!strict\nreturn {\n    {\n        name = \"onboarding.memory\",\n        kind = \"procedure.workflow\",\n        summary = \"Repository onboarding\",\n    },\n}\n"
+    }
+  ]
+}

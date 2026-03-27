@@ -18,7 +18,7 @@ def test_all_bundled_profiles_validate() -> None:
 
 def test_catalog_has_expected_targets() -> None:
     targets = {entry.target.value for entry in list_targets()}
-    assert {"codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp"} <= targets
+    assert {"codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp", "roblox-embodiment"} <= targets
 
 
 def test_gemini_profile_has_hooks_and_wrappers() -> None:

@@ -26,7 +26,7 @@ validate-example:
 	$(PYTHONPATH_ENV) python -m oac validate examples/hello-capsule
 
 validate-profiles:
-	$(PYTHONPATH_ENV) python -c "from pathlib import Path; import sys; sys.path.insert(0, 'src'); from oac.profile_io import validate_profile; paths=[Path('examples/adapter-profiles/codex.default.yaml'), Path('examples/adapter-profiles/openclaw.default.yaml'), Path('examples/adapter-profiles/claude-code.default.yaml'), Path('examples/adapter-profiles/opencode.default.yaml'), Path('examples/adapter-profiles/gemini.default.yaml'), Path('examples/adapter-profiles/mcp.default.yaml'), Path('examples/adapter-profiles/webmcp.default.yaml')]; [print(f'valid profile: {validate_profile(path).profile_name}') for path in paths]"
+	$(PYTHONPATH_ENV) python -c "from pathlib import Path; import sys; sys.path.insert(0, 'src'); from oac.profile_io import validate_profile; paths=[Path('examples/adapter-profiles/codex.default.yaml'), Path('examples/adapter-profiles/openclaw.default.yaml'), Path('examples/adapter-profiles/claude-code.default.yaml'), Path('examples/adapter-profiles/opencode.default.yaml'), Path('examples/adapter-profiles/gemini.default.yaml'), Path('examples/adapter-profiles/mcp.default.yaml'), Path('examples/adapter-profiles/webmcp.default.yaml'), Path('examples/adapter-profiles/roblox-embodiment.default.yaml')]; [print(f'valid profile: {validate_profile(path).profile_name}') for path in paths]"
 
 smoke:
 	$(PYTHONPATH_ENV) python scripts/smoke_all.py --mode all --quiet

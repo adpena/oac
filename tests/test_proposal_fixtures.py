@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "examples" / "hello-capsule"
 PROJECTION_FIXTURES = ROOT / "tests" / "fixtures" / "projections"
 PROPOSAL_FIXTURES = ROOT / "tests" / "fixtures" / "proposals"
-TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp"]
+TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp", "roblox-embodiment"]
 
 
 def test_proposals_match_fixtures() -> None:

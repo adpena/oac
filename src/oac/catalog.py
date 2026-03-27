@@ -794,6 +794,105 @@ def _qwen_code_profile() -> AdapterProfile:
     )
 
 
+def _roblox_embodiment_profile() -> AdapterProfile:
+    return AdapterProfile(
+        profile_name="roblox-embodiment.default",
+        target=HarnessTarget.ROBLOX_EMBODIMENT,
+        description="Default Roblox embodiment projection with Luau agent-config tables.",
+        surfaces=[
+            SurfaceSpec(
+                name="skills-config",
+                path="agent-config/skills.luau",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                portability=PortabilityClass.PORTABLE,
+                notes="Skill definitions as a Luau table literal.",
+            ),
+            SurfaceSpec(
+                name="persona-config",
+                path="agent-config/persona.luau",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                portability=PortabilityClass.PORTABLE,
+                notes="Agent personality and identity config as Luau table.",
+            ),
+            SurfaceSpec(
+                name="memory-config",
+                path="agent-config/memory.luau",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                portability=PortabilityClass.PORTABLE,
+                notes="Semantic memory snapshot as Luau table.",
+            ),
+            SurfaceSpec(
+                name="patrol-config",
+                path="agent-config/patrols.luau",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                portability=PortabilityClass.PORTABLE,
+                notes="Patrol waypoints derived from capsule procedures.",
+            ),
+            SurfaceSpec(
+                name="projection-metadata",
+                path="agent-config/manifest.json",
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                portability=PortabilityClass.PORTABLE,
+                notes="Traceability metadata for the Roblox embodiment projection.",
+            ),
+        ],
+        flags=[
+            FlagSpec(
+                name="emit_patrol_config",
+                cli_name="--emit-patrol-config",
+                harness_name="agent-config/patrols.luau",
+                type=FlagType.BOOL,
+                default=True,
+                description="Emit patrol waypoint config from capsule procedures.",
+            ),
+            FlagSpec(
+                name="emit_memory_snapshot",
+                cli_name="--emit-memory-snapshot",
+                harness_name="agent-config/memory.luau",
+                type=FlagType.BOOL,
+                default=True,
+                description="Emit semantic memory snapshot as a Luau table.",
+            ),
+            FlagSpec(
+                name="luau_strict_mode",
+                cli_name="--luau-strict-mode",
+                harness_name="luau.strict",
+                type=FlagType.BOOL,
+                default=True,
+                description="Emit --!strict directive at the top of generated Luau files.",
+            ),
+        ],
+        mappings=[
+            MappingRule(
+                canonical_kind="skill.bundle",
+                target_surface="skills-config",
+                target_path="agent-config/skills.luau",
+                mode=MappingMode.MANAGED_FILE,
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Capsule skills project into a single Luau table.",
+            ),
+            MappingRule(
+                canonical_kind="identity.persona",
+                target_surface="persona-config",
+                target_path="agent-config/persona.luau",
+                mode=MappingMode.MANAGED_FILE,
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Persona and identity project into agent personality config.",
+            ),
+            MappingRule(
+                canonical_kind="memory.semantic",
+                target_surface="memory-config",
+                target_path="agent-config/memory.luau",
+                mode=MappingMode.MANAGED_FILE,
+                ownership_mode=OwnershipMode.MANAGED_FILE,
+                notes="Semantic memory projects into a Luau lookup table.",
+            ),
+        ],
+        hooks=[],
+        wrappers=[],
+    )
+
+
 CATALOG: dict[HarnessTarget, TargetCatalogEntry] = {
     HarnessTarget.CODEX: TargetCatalogEntry(
         target=HarnessTarget.CODEX,
@@ -842,6 +941,12 @@ CATALOG: dict[HarnessTarget, TargetCatalogEntry] = {
         title="WebMCP",
         summary="Browser-facing read-only companion surface.",
         default_profile=_webmcp_profile(),
+    ),
+    HarnessTarget.ROBLOX_EMBODIMENT: TargetCatalogEntry(
+        target=HarnessTarget.ROBLOX_EMBODIMENT,
+        title="Roblox Embodiment",
+        summary="Luau agent-config projection for embodied Roblox agents.",
+        default_profile=_roblox_embodiment_profile(),
     ),
 }
 

@@ -18,7 +18,7 @@ EXAMPLE = ROOT / "examples" / "hello-capsule"
 PROJECTION_FIXTURES = ROOT / "tests" / "fixtures" / "projections"
 INGEST_FIXTURES = ROOT / "tests" / "fixtures" / "ingest"
 PROPOSAL_FIXTURES = ROOT / "tests" / "fixtures" / "proposals"
-TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp"]
+TARGETS = ["codex", "openclaw", "claude-code", "opencode", "gemini", "mcp", "webmcp", "roblox-embodiment"]
 
 
 def main() -> None:

@@ -16,4 +16,4 @@ def test_load_example_manifest() -> None:
 def test_validate_manifest() -> None:
     result = validate_manifest(EXAMPLE)
     assert result.capsule_id == "hello-capsule"
-    assert result.target_count == 7
+    assert result.target_count == 8

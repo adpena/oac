@@ -18,6 +18,7 @@ class HarnessTarget(str, Enum):
     MCP = "mcp"
     QWEN_CODE = "qwen-code"
     WEBMCP = "webmcp"
+    ROBLOX_EMBODIMENT = "roblox-embodiment"
 
 
 class ProjectionMode(str, Enum):

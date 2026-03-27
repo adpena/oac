@@ -1,0 +1,163 @@
+{
+  "target": "roblox-embodiment",
+  "capsule_id": "hello-capsule",
+  "source_root": "roblox-embodiment",
+  "format": "oac.proposal-bundle.v0",
+  "stats": {
+    "total": 4,
+    "promotable": 2,
+    "noop": 0,
+    "deferred": 0,
+    "target_local": 0,
+    "user_local": 0,
+    "runtime_state": 0,
+    "unsupported": 2,
+    "conflict": 0
+  },
+  "notes": [
+    "Projection metadata (manifest.json) is ignored during ingest.",
+    "Motion and audit logs are runtime-state and stay as sidecars."
+  ],
+  "records": [
+    {
+      "proposal_id": "8ccfe3298b84d779",
+      "candidate_id": "dee6062331b1fc50",
+      "target": "roblox-embodiment",
+      "disposition": "unsupported",
+      "operation": "skip",
+      "kind": "skill.bundle",
+      "canonical_kind": null,
+      "source_path": "agent-config/skills.luau",
+      "surface_name": "skills-config",
+      "summary": "--!strict",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/skills.luau",
+      "canonical_path": null,
+      "rationale": "No canonical destination is defined for this candidate kind yet.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "skills-config",
+        "relative_path": "agent-config/skills.luau",
+        "surface_name": "skills-config",
+        "notes": "Luau skill definitions scanned back as skill bundles.",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "--!strict\nreturn {\n    {\n        name = \"onboarding\",\n        content = \"# onboarding\\n\\n## Trigger\\n\\nUse when starting work in the starter repository.\\n\\n## Steps\\n\\n1. Read `README.md`, `AGENTS.md`, and `ROADMAP.md`.\\n2. Read the smallest relevant spec.\\n3. Move the next incomplete gate with tests and fixture updates.\\n4. Keep the canonical layer human-readable.\\n\",\n    },\n}\n",
+      "canonical_content": "",
+      "current_content": "",
+      "diff": "",
+      "structured_diff": {
+        "additions": 0,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 0
+      }
+    },
+    {
+      "proposal_id": "7d4d8b585571dca0",
+      "candidate_id": "8a5cdd7694c7f3b8",
+      "target": "roblox-embodiment",
+      "disposition": "promotable",
+      "operation": "update",
+      "kind": "identity.persona",
+      "canonical_kind": "identity.persona",
+      "source_path": "agent-config/persona.luau",
+      "surface_name": "persona-config",
+      "summary": "--!strict",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/persona.luau",
+      "canonical_path": "identity/persona.md",
+      "rationale": "Persona updates map into the canonical identity tree.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "persona-config",
+        "relative_path": "agent-config/persona.luau",
+        "surface_name": "persona-config",
+        "notes": "Persona config scanned back as identity candidate.",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "--!strict\nreturn {\n    displayName = \"4a438a3cfb0a\",\n    displayIdentity = \"Hello Capsule is a calm, implementation-oriented assistant capsule used for starter validation.\",\n    persona = \"Prefer concrete, testable changes. Keep instructions concise and durable.\",\n    userModel = \"The user prefers practical design, explicit contracts, and launch-ready examples.\",\n}\n",
+      "canonical_content": "---\nkind: identity.persona\nsummary: --!strict\nsource_target: roblox-embodiment\nsource_surface: persona-config\n---\n\n--!strict\nreturn {\n    displayName = \"4a438a3cfb0a\",\n    displayIdentity = \"Hello Capsule is a calm, implementation-oriented assistant capsule used for starter validation.\",\n    persona = \"Prefer concrete, testable changes. Keep instructions concise and durable.\",\n    userModel = \"The user prefers practical design, explicit contracts, and launch-ready examples.\",\n}\n",
+      "current_content": "---\nkind: identity.persona\nsummary: Builder persona\n---\n\nPrefer concrete, testable changes. Keep instructions concise and durable.\n",
+      "diff": "--- current:identity/persona.md\n+++ proposed:identity/persona.md\n@@ -1,6 +1,14 @@\n ---\n kind: identity.persona\n-summary: Builder persona\n+summary: --!strict\n+source_target: roblox-embodiment\n+source_surface: persona-config\n ---\n \n-Prefer concrete, testable changes. Keep instructions concise and durable.\n+--!strict\n+return {\n+    displayName = \"4a438a3cfb0a\",\n+    displayIdentity = \"Hello Capsule is a calm, implementation-oriented assistant capsule used for starter validation.\",\n+    persona = \"Prefer concrete, testable changes. Keep instructions concise and durable.\",\n+    userModel = \"The user prefers practical design, explicit contracts, and launch-ready examples.\",\n+}\n",
+      "structured_diff": {
+        "additions": 10,
+        "deletions": 2,
+        "unchanged": 4,
+        "total_lines": 14
+      }
+    },
+    {
+      "proposal_id": "07cf0c11529f92dc",
+      "candidate_id": "a9dde20afde19386",
+      "target": "roblox-embodiment",
+      "disposition": "promotable",
+      "operation": "create",
+      "kind": "memory.semantic",
+      "canonical_kind": "memory.semantic",
+      "source_path": "agent-config/memory.luau",
+      "surface_name": "memory-config",
+      "summary": "--!strict",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/memory.luau",
+      "canonical_path": "memory/semantic/strict.memory.md",
+      "rationale": "Portable semantic memory promotes into canonical memory/semantic/.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "memory-config",
+        "relative_path": "agent-config/memory.luau",
+        "surface_name": "memory-config",
+        "notes": "Semantic memory config scanned back as memory candidate.",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "--!strict\nreturn {\n    {\n        key = \"product-decisions.memory\",\n        kind = \"memory.semantic\",\n        body = \"- The canonical artifact is an Open Agent Capsule.\\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\\n- MCP is an access surface, not the canonical storage layer.\",\n    },\n    {\n        key = \"user-preferences.memory\",\n        kind = \"memory.semantic\",\n        body = \"- Prefer file-first architecture.\\n- Prefer deterministic tests over vague scaffolding.\\n- Keep launch language honest about what is implemented versus scaffolded.\",\n    },\n}\n",
+      "canonical_content": "---\nkind: memory.semantic\nsummary: --!strict\nsource_target: roblox-embodiment\nsource_surface: memory-config\n---\n\n--!strict\nreturn {\n    {\n        key = \"product-decisions.memory\",\n        kind = \"memory.semantic\",\n        body = \"- The canonical artifact is an Open Agent Capsule.\\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\\n- MCP is an access surface, not the canonical storage layer.\",\n    },\n    {\n        key = \"user-preferences.memory\",\n        kind = \"memory.semantic\",\n        body = \"- Prefer file-first architecture.\\n- Prefer deterministic tests over vague scaffolding.\\n- Keep launch language honest about what is implemented versus scaffolded.\",\n    },\n}\n",
+      "current_content": "",
+      "diff": "--- current:memory/semantic/strict.memory.md\n+++ proposed:memory/semantic/strict.memory.md\n@@ -0,0 +1,20 @@\n+---\n+kind: memory.semantic\n+summary: --!strict\n+source_target: roblox-embodiment\n+source_surface: memory-config\n+---\n+\n+--!strict\n+return {\n+    {\n+        key = \"product-decisions.memory\",\n+        kind = \"memory.semantic\",\n+        body = \"- The canonical artifact is an Open Agent Capsule.\\n- Adapter profiles customize harness-specific surfaces without changing canonical meaning.\\n- MCP is an access surface, not the canonical storage layer.\",\n+    },\n+    {\n+        key = \"user-preferences.memory\",\n+        kind = \"memory.semantic\",\n+        body = \"- Prefer file-first architecture.\\n- Prefer deterministic tests over vague scaffolding.\\n- Keep launch language honest about what is implemented versus scaffolded.\",\n+    },\n+}\n",
+      "structured_diff": {
+        "additions": 20,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 20
+      }
+    },
+    {
+      "proposal_id": "be1f1276ba808f0f",
+      "candidate_id": "2e581d66a95e5fc6",
+      "target": "roblox-embodiment",
+      "disposition": "unsupported",
+      "operation": "skip",
+      "kind": "procedure.patrol",
+      "canonical_kind": null,
+      "source_path": "agent-config/patrols.luau",
+      "surface_name": "patrol-config",
+      "summary": "--!strict",
+      "candidate_path_hint": ".oac/candidates/roblox-embodiment/patrols.luau",
+      "canonical_path": null,
+      "rationale": "No canonical destination is defined for this candidate kind yet.",
+      "metadata": {
+        "parser": "markdown",
+        "rule": "patrol-config",
+        "relative_path": "agent-config/patrols.luau",
+        "surface_name": "patrol-config",
+        "notes": "Patrol config scanned back as procedure candidates.",
+        "portability": "portable",
+        "ownership_mode": "managed-file",
+        "lossiness": "partially-lossless"
+      },
+      "content": "--!strict\nreturn {\n    {\n        name = \"onboarding.memory\",\n        kind = \"procedure.workflow\",\n        summary = \"Repository onboarding\",\n    },\n}\n",
+      "canonical_content": "",
+      "current_content": "",
+      "diff": "",
+      "structured_diff": {
+        "additions": 0,
+        "deletions": 0,
+        "unchanged": 0,
+        "total_lines": 0
+      }
+    }
+  ]
+}
